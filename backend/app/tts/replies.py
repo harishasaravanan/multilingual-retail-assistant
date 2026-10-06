@@ -42,3 +42,9 @@ def build_reply(status, reply_language, result=None):
     unit = _CURRENCY.get(lang, _CURRENCY["en"]).get(result["currency"], result["currency"])
     return template.format(product=result["product"], aisle=result["aisle"],
                            shelf=result["shelf"], price=result["price"], unit=unit)
+
+
+def spoken_language(status, reply_language):
+    """Language the reply text is actually written in (falls back to English)."""
+    lang = reply_language if reply_language in _TEXT else "en"
+    return lang if status in _TEXT[lang] else "en"

@@ -9,7 +9,8 @@ import time
 from app.language.detect import detect_language, reply_language
 from app.matching.matcher import Matcher
 from app.service import find_product
-from app.tts.replies import build_reply
+from app.tts.replies import build_reply, spoken_language
+from app.tts.engine import url_for
 
 SESSION_TIMEOUT_S = 10
 MAX_UTTERANCE_BYTES = 15 * 16000 * 2  # 15 s of 16 kHz 16-bit mono
@@ -40,6 +41,7 @@ class Pipeline:
         else:
             result = None
         rl = reply_language(language, status)
+        text = build_reply(status, rl, result)
         return {
             "request_id": request_id,
             "status": status,
@@ -48,15 +50,16 @@ class Pipeline:
             "product_id": product_id,
             "confidence": m.confidence,
             "result": result,
-            "reply_text": build_reply(status, rl, result),
-            "tts_audio_url": None,  # set when the TTS service exists (Phase 6)
+            "reply_text": text,
+            "tts_audio_url": url_for(spoken_language(status, rl), text),
         }
 
     def error(self, request_id):
         return {
             "request_id": request_id, "status": "ERROR", "language": "en",
             "reply_language": "en", "product_id": None, "confidence": None, "result": None,
-            "reply_text": build_reply("ERROR", "en"), "tts_audio_url": None,
+            "reply_text": build_reply("ERROR", "en"),
+            "tts_audio_url": url_for("en", build_reply("ERROR", "en")),
         }
 
 

@@ -8,16 +8,18 @@ Run (development, localhost only):
 import hmac
 import json
 import os
+import re
 import uuid
 
 from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 
 from app.database.db import build_db
 from app.events import Broker, event_stream
 from app.pipeline import ApiError, Pipeline, SessionManager
 from app.service import find_product
+from app.tts import engine
 
 
 def _rid():
@@ -119,5 +121,13 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
         need_kiosk(request)
         return StreamingResponse(event_stream(broker), media_type="text/event-stream",
                                  headers={"Cache-Control": "no-cache"})
+
+    @app.get("/tts/{name}")
+    async def tts(name: str, request: Request):
+        need_kiosk(request)
+        f = engine.CACHE / name
+        if not re.fullmatch(r"[0-9a-f]{16}\.mp3", name) or not f.is_file():
+            raise ApiError(404, "UNKNOWN_AUDIO", "No such audio file")
+        return FileResponse(f, media_type="audio/mpeg")
 
     return app

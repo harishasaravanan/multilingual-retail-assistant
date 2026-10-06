@@ -17,3 +17,4 @@ node_modules/
 tests/audio/private/
 .venv/
 .pytest_cache/
+backend/tts_cache/
