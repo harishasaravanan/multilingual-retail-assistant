@@ -4,12 +4,16 @@
 | Field | Value |
 |---|---|
 | Document ID | MRA-SW917-SAD-002 |
-| Version | 2.1 (supersedes 2.0) |
+| Version | 2.2 (supersedes 2.1) |
 | Status | Proposed / Implementation Ready |
 | Target Platform | SiWx917-DK2605A (BRD2605A) |
 | Connectivity | Wi-Fi 6-capable wireless connectivity with secure IP transport; BLE |
 | Languages | English, Tamil, Hindi, Tanglish |
 | Output | Kiosk screen + spoken reply through the kiosk host speaker |
+
+### Changes from v2.1
+- Added `node` to the data model; route example made consistent with §9.
+- Tier 1 push channel frozen as SSE; API details moved to `docs/API.md` v1.1.
 
 ### Changes from v2.0
 - Scope tiers rewritten: Tier 1 is the mandatory MVP; Tier 2 is polish. No contradictions between sections.
@@ -194,7 +198,7 @@ Internal lookup (/find-product, product_id=P001)
 Database: P001 -> stock 12, price 249 INR, aisle 7, shelf 3, (x,y)
         |
         v
-Router: KIOSK -> A1 -> A2 -> A3 -> A7  (+ step text)
+Router: KIOSK -> A1 -> A2 -> A3 -> A4 -> A5 -> A7  (+ step text)
         |
         v
 Result JSON -> Kiosk UI (screen)  +  TTS -> Speaker
@@ -293,7 +297,7 @@ Response
 }
 ```
 
-The kiosk UI receives the same result from the backend over a host-side push channel (SSE or WebSocket between backend and UI). The SiWx917 only uses `status` for LED feedback.
+The kiosk UI receives the same result from the backend over a host-side push channel. Tier 1 uses SSE (`GET /kiosk/events`); the full contract, error body, non-OK responses and session rules are in `docs/API.md` (v1.1), which is the source of truth for message shapes. The SiWx917 only uses `status` for LED feedback.
 
 Internal (called by orchestrator after matching; also used by UI tests):
 ```
@@ -304,7 +308,8 @@ Response
 {
   "product": "Dove Shampoo", "available": true, "stock": 12,
   "price": 249, "currency": "INR", "aisle": 7, "shelf": 3, "x": 18, "y": 42,
-  "route": { "nodes": ["KIOSK","A1","A2","A3","A7"],
+  "node": "A7",
+  "route": { "nodes": ["KIOSK","A1","A2","A3","A4","A5","A7"],
              "steps": ["Walk straight to A1", "..."] }
 }
 ```
@@ -335,6 +340,7 @@ Other endpoints: `/health`; `/admin/*` (Tier 2, auth required).
 | stock | 12 | Quantity |
 | aisle / shelf | 7 / 3 | Physical location |
 | x, y | 18, 42 | Map coordinates |
+| node | A7 | Map node the product sits on; must exist in the map |
 | alternatives (Tier 2) | P002, P003 | Out-of-stock suggestions |
 
 Rules:
