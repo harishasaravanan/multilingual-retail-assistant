@@ -1,0 +1,11 @@
+product_id,name,category,price,currency,stock,aisle,shelf,x,y,node
+P001,Dove Shampoo,Personal Care,249,INR,12,7,3,18,42,A7
+P002,Colgate Toothpaste,Personal Care,95,INR,30,7,1,18,40,A7
+P003,Parle-G Biscuits,Snacks,10,INR,80,2,2,6,12,A2
+P004,Aashirvaad Atta 5kg,Staples,260,INR,15,4,1,10,22,A4
+P005,Tata Salt 1kg,Staples,28,INR,40,4,2,10,24,A4
+P006,Amul Butter,Dairy,58,INR,0,5,1,14,30,A5
+P007,Maggi Noodles,Snacks,14,INR,60,2,3,6,14,A2
+P008,Surf Excel 1kg,Household,135,INR,20,6,2,16,36,A6
+P009,Lifebuoy Soap,Personal Care,35,INR,50,7,2,18,41,A7
+P010,Britannia Bread,Bakery,45,INR,8,3,1,8,18,A3

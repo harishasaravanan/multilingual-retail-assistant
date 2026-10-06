@@ -1,0 +1,35 @@
+product_id,alias,script,language
+P001,dove shampoo,latin,en
+P001,dove shampu,latin,ta-en
+P001,டவ் ஷாம்பு,tamil,ta
+P001,डव शैम्पू,devanagari,hi
+P002,colgate toothpaste,latin,en
+P002,colgate paste,latin,ta-en
+P002,கோல்கேட்,tamil,ta
+P002,कोलगेट,devanagari,hi
+P003,parle g biscuits,latin,en
+P003,பார்லே ஜி,tamil,ta
+P003,पारले जी,devanagari,hi
+P004,aashirvaad atta,latin,en
+P004,ஆசீர்வாத் ஆட்டா,tamil,ta
+P004,आशीर्वाद आटा,devanagari,hi
+P005,tata salt,latin,en
+P005,tata uppu,latin,ta-en
+P005,டாடா உப்பு,tamil,ta
+P005,टाटा नमक,devanagari,hi
+P006,amul butter,latin,en
+P006,amul vennai,latin,ta-en
+P006,அமுல் வெண்ணெய்,tamil,ta
+P006,अमूल मक्खन,devanagari,hi
+P007,maggi noodles,latin,en
+P007,மேகி,tamil,ta
+P007,मैगी,devanagari,hi
+P008,surf excel,latin,en
+P008,சர்ஃப் எக்செல்,tamil,ta
+P008,सर्फ एक्सेल,devanagari,hi
+P009,lifebuoy soap,latin,en
+P009,லைஃப்பாய்,tamil,ta
+P009,लाइफबॉय,devanagari,hi
+P010,britannia bread,latin,en
+P010,பிரிட்டானியா பிரெட்,tamil,ta
+P010,ब्रिटानिया ब्रेड,devanagari,hi

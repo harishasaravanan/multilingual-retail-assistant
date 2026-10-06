@@ -1,0 +1,17 @@
+# Secrets
+firmware/siwx917/config/wifi_config.h
+*.env
+.env*
+*.pem
+*.key
+secrets/
+# Build / tooling
+build/
+*.o
+*.elf
+*.bin
+__pycache__/
+node_modules/
+*.db
+# Test audio only with speaker consent
+tests/audio/private/
