@@ -1,12 +1,13 @@
 # API Specification
 
-Source of truth: [SAD.md](SAD.md) §7.6 and §8. Version: 1.0 (Tier 1). Base URL: `https://<backend-host>`. All traffic over TLS.
+Source of truth: [SAD.md](SAD.md) §7.6 and §8. Version: 1.1 (Tier 1, frozen for M0). Base URL: `https://<backend-host>`. All traffic over TLS.
 
 ## Conventions
 - Device calls send `Authorization: Bearer <DEVICE_TOKEN>`.
+- Kiosk UI calls send `Authorization: Bearer <KIOSK_TOKEN>`. The two tokens are separate and least-privilege: the device token cannot read `/kiosk/events` or `/tts/*`.
 - Audio: raw PCM, 16 kHz, 16-bit, mono, little-endian, about 200 ms per chunk (`Content-Type: application/octet-stream`).
 - JSON responses use UTF-8. Prices are numbers with a separate ISO 4217 `currency`.
-- Every response carries `request_id` for log correlation.
+- Every response, including errors, carries `request_id` for log correlation.
 
 ## Status values
 | status | Meaning | Screen/voice state |
@@ -16,6 +17,14 @@ Source of truth: [SAD.md](SAD.md) §7.6 and §8. Version: 1.0 (Tier 1). Base URL
 | NOT_FOUND | No product matched | not found |
 | LOW_CONFIDENCE | Match below threshold | please repeat |
 | ERROR | Backend or STT failure | error / offline |
+
+"Network down" is detected by the device (no response) and shown as the offline state; the backend never sends it.
+
+## Error body (all non-2xx responses)
+```
+{ "request_id": "r_001", "error": "SESSION_EXPIRED", "message": "Session s_8f3a expired" }
+```
+`error` is one of: `UNAUTHORIZED`, `UNKNOWN_SESSION`, `SESSION_EXPIRED`, `INVALID_AUDIO`, `UNKNOWN_PRODUCT`, `INVALID_BODY`, `INTERNAL`.
 
 ## External endpoints (device)
 
@@ -27,12 +36,14 @@ Response 200
 ```
 
 ### POST /voice-query/{session_id}/chunk
-Body: raw PCM chunk. Response `204 No Content`. Errors: `401` bad token, `404` unknown session, `410` session expired.
+Body: raw PCM chunk. Response `204 No Content`.
+Errors: `401` bad token, `404` unknown session, `410` session expired or already ended, `422` bad audio (odd byte count or chunk over 64 KB).
 
 ### POST /voice-query/{session_id}/end
-Closes the session and returns the final result.
+Closes the session and returns the final result. A second `/end` on the same session returns `410`.
+
+**Response 200, status OK or OUT_OF_STOCK**
 ```
-Response 200
 {
   "request_id": "r_001",
   "status": "OK",
@@ -44,7 +55,42 @@ Response 200
   "tts_audio_url": "/tts/abc123.wav"
 }
 ```
-The device uses only `status` (LED feedback). The kiosk UI receives the same payload over a host-side push channel (SSE or WebSocket between backend and UI).
+For `OUT_OF_STOCK`, `result.available` is `false` and `result.stock` is `0`.
+
+**Response 200, status NOT_FOUND, LOW_CONFIDENCE or ERROR**
+```
+{
+  "request_id": "r_002",
+  "status": "LOW_CONFIDENCE",
+  "language": "en",
+  "reply_language": "en",
+  "product_id": null,
+  "confidence": 0.41,
+  "result": null,
+  "tts_audio_url": "/tts/err_repeat_en.wav"
+}
+```
+`product_id` and `result` are `null`. `tts_audio_url` is still set to the spoken error message in `reply_language`, so every error has a voice. If STT itself fails, `confidence` is `null` and `reply_language` is `en`.
+
+The device uses only `status` (LED feedback) and does not fetch `tts_audio_url`.
+
+### Session rules
+- A session expires 10 s after its last chunk (or after `/start` if no chunk arrives).
+- Maximum utterance length is 15 s of audio; further chunks return `422`.
+- Chunks are sent in order, one at a time. The backend does not reorder.
+
+## Kiosk UI endpoints (host side)
+
+### GET /kiosk/events
+Server-Sent Events (SSE) stream, chosen for Tier 1. Requires `KIOSK_TOKEN`. One event per finished utterance:
+```
+event: result
+data: { ...same payload as the /end response... }
+```
+The UI also receives `event: state` with `{ "state": "listening" | "processing" }` when a session starts and when `/end` is received, so the screen can show those states. The UI reconnects automatically; the backend sends a comment line every 15 s as a heartbeat.
+
+### GET /tts/{file}
+Returns the WAV named in `tts_audio_url`. Requires `KIOSK_TOKEN`. The kiosk UI fetches and plays it on the host speaker. Files are deleted after 10 minutes.
 
 ## Internal endpoint
 
@@ -56,6 +102,8 @@ Request
 
 Response 200
 {
+  "request_id": "r_001",
+  "product_id": "P001",
   "product": "Dove Shampoo",
   "available": true,
   "stock": 12,
@@ -65,12 +113,14 @@ Response 200
   "shelf": 3,
   "x": 18,
   "y": 42,
+  "node": "A7",
   "route": {
-    "nodes": ["KIOSK", "A1", "A2", "A3", "A7"],
+    "nodes": ["KIOSK", "A1", "A2", "A3", "A4", "A5", "A7"],
     "steps": ["Walk straight to A1", "..."]
   }
 }
 ```
+Out of stock is `available: false` with `stock: 0`; the route is still returned. `/end` maps that to `OUT_OF_STOCK`.
 Errors: `404` unknown `product_id`, `422` invalid body.
 
 ## Other endpoints
