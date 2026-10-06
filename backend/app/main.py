@@ -1,0 +1,123 @@
+"""FastAPI layer for API.md v1.1. Logic lives in pipeline.py, service.py and events.py.
+
+Run (development, localhost only):
+    cd backend
+    export MRA_DEVICE_TOKEN=dev-device MRA_KIOSK_TOKEN=dev-kiosk MRA_DEV_TRANSCRIPT=1
+    uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8000
+"""
+import hmac
+import json
+import os
+import uuid
+
+from fastapi import FastAPI, Request, Response
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse, StreamingResponse
+
+from app.database.db import build_db
+from app.events import Broker, event_stream
+from app.pipeline import ApiError, Pipeline, SessionManager
+from app.service import find_product
+
+
+def _rid():
+    return "r_" + uuid.uuid4().hex[:6]
+
+
+def _bearer_ok(request, expected):
+    header = request.headers.get("authorization", "")
+    scheme, _, token = header.partition(" ")
+    return scheme.lower() == "bearer" and hmac.compare_digest(token.encode(), expected.encode())
+
+
+def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_transcript=None):
+    device_token = device_token or os.environ.get("MRA_DEVICE_TOKEN")
+    kiosk_token = kiosk_token or os.environ.get("MRA_KIOSK_TOKEN")
+    if not device_token or not kiosk_token:
+        raise RuntimeError("Set MRA_DEVICE_TOKEN and MRA_KIOSK_TOKEN before starting the backend")
+    if dev_transcript is None:
+        dev_transcript = os.environ.get("MRA_DEV_TRANSCRIPT") == "1"
+
+    conn = conn or build_db()  # in-memory DB seeded from database/*.csv
+    pipeline = Pipeline(conn)
+    sessions = SessionManager(pipeline, stt=stt)
+    broker = Broker()
+
+    app = FastAPI(title="Multilingual Retail Assistant", version="1.1")
+    app.state.broker = broker
+    app.state.sessions = sessions
+
+    @app.exception_handler(ApiError)
+    async def api_error(_request, exc):
+        return JSONResponse(status_code=exc.status_code, content={
+            "request_id": _rid(), "error": exc.error, "message": exc.message})
+
+    @app.exception_handler(RequestValidationError)
+    async def bad_request(_request, exc):
+        return JSONResponse(status_code=422, content={
+            "request_id": _rid(), "error": "INVALID_BODY", "message": "Invalid request"})
+
+    def need_device(request):
+        if not _bearer_ok(request, device_token):
+            raise ApiError(401, "UNAUTHORIZED", "Missing or bad device token")
+
+    def need_kiosk(request):
+        if not _bearer_ok(request, kiosk_token):
+            raise ApiError(401, "UNAUTHORIZED", "Missing or bad kiosk token")
+
+    @app.get("/health")
+    async def health():
+        return {"status": "up"}
+
+    @app.post("/voice-query/start")
+    async def start(request: Request):
+        need_device(request)
+        out = sessions.start()
+        broker.publish("state", {"state": "listening"})
+        return out
+
+    @app.post("/voice-query/{session_id}/chunk")
+    async def chunk(session_id: str, request: Request):
+        need_device(request)
+        sessions.add_chunk(session_id, await request.body())
+        return Response(status_code=204)
+
+    @app.post("/voice-query/{session_id}/end")
+    async def end(session_id: str, request: Request):
+        need_device(request)
+        transcript = None
+        if dev_transcript:  # development only: skip STT with {"transcript": "..."}
+            raw = await request.body()
+            if raw:
+                try:
+                    transcript = json.loads(raw)["transcript"]
+                except (ValueError, KeyError, TypeError):
+                    raise ApiError(422, "INVALID_BODY", 'Expected {"transcript": "..."}')
+        sessions.check(session_id)
+        broker.publish("state", {"state": "processing"})
+        payload = sessions.end(session_id, transcript=transcript)
+        broker.publish("result", payload)
+        return payload
+
+    @app.post("/find-product")
+    async def find(request: Request):
+        need_kiosk(request)
+        try:
+            body = await request.json()
+            product_id = body["product_id"]
+            if not isinstance(product_id, str):
+                raise TypeError
+        except (ValueError, KeyError, TypeError):
+            raise ApiError(422, "INVALID_BODY", 'Expected {"product_id": "P001", "language": "en"}')
+        result = find_product(conn, product_id)
+        if result is None:
+            raise ApiError(404, "UNKNOWN_PRODUCT", f"Unknown product_id {product_id}")
+        return {"request_id": _rid(), **result}
+
+    @app.get("/kiosk/events")
+    async def kiosk_events(request: Request):
+        need_kiosk(request)
+        return StreamingResponse(event_stream(broker), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-cache"})
+
+    return app

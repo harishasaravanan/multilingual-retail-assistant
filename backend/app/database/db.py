@@ -26,7 +26,8 @@ def _num(value):
 def build_db(db_path=":memory:", db_dir=DB_DIR):
     """Create the schema and load every seed file. Returns an open connection."""
     db_dir = Path(db_dir)
-    conn = sqlite3.connect(str(db_path))
+    # The web layer runs on a different thread than the one that builds the DB.
+    conn = sqlite3.connect(str(db_path), check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.executescript((db_dir / "schema" / "schema.sql").read_text(encoding="utf-8"))
     seed = db_dir / "seed"

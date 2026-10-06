@@ -87,6 +87,10 @@ class SessionManager:
             raise ApiError(410, "SESSION_EXPIRED", f"Session {sid} expired")
         return s
 
+    def check(self, sid):
+        """Raise ApiError unless the session exists and is still open."""
+        self._get(sid)
+
     def add_chunk(self, sid, data):
         s = self._get(sid)
         if len(data) % 2 or len(data) > MAX_CHUNK_BYTES:
