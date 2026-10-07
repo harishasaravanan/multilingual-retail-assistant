@@ -44,11 +44,16 @@ def shortest_path(graph, start, goal):
 
 
 def build_steps(nodes, aisle, shelf):
-    steps = []
-    for i, node in enumerate(nodes[1:]):
-        steps.append(f"Walk straight to {node}" if i == 0 else f"Continue to {node}")
-    steps.append(f"You have arrived. Look in aisle {aisle}, shelf {shelf}")
-    return steps
+    dest = nodes[-1]
+    n = int(dest[1:]) if dest[:1] == "A" and dest[1:].isdigit() else 0
+    if not n:
+        return ["You have arrived. Look in aisle %s, shelf %s" % (aisle, shelf)]
+    side = "left" if n in (1, 2, 5, 6) else "right"
+    first = ("Walk straight to the main walkway between the two rows" if n <= 4
+             else "Walk to the bottom corridor below the aisles")
+    return [first,
+            "Turn %s and walk to aisle %s" % (side, dest),
+            "You have arrived. Look in aisle %s, shelf %s" % (aisle, shelf)]
 
 
 def route_to(conn, node, aisle, shelf, start="KIOSK"):

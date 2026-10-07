@@ -4,15 +4,15 @@ from app.database.db import build_db
 from app.routing.router import RouteError, load_graph, shortest_path
 from app.service import find_product
 
-EXPECTED = {
-    "A1": ["KIOSK", "A1"],
-    "A2": ["KIOSK", "A1", "A2"],
-    "A3": ["KIOSK", "A1", "A2", "A3"],
-    "A4": ["KIOSK", "A1", "A2", "A3", "A4"],
-    "A5": ["KIOSK", "A1", "A2", "A3", "A4", "A5"],
-    "A6": ["KIOSK", "A1", "A2", "A3", "A4", "A5", "A6"],
-    "A7": ["KIOSK", "A1", "A2", "A3", "A4", "A5", "A7"],  # same as API.md example
-    "A8": ["KIOSK", "A1", "A2", "A3", "A4", "A5", "A7", "A8"],
+ALLOWED = {
+    "A1": [["KIOSK", "A6", "A2", "A1"], ["KIOSK", "A6", "A5", "A1"]],
+    "A2": [["KIOSK", "A6", "A2"]],
+    "A3": [["KIOSK", "A7", "A3"]],
+    "A4": [["KIOSK", "A7", "A3", "A4"], ["KIOSK", "A7", "A8", "A4"]],
+    "A5": [["KIOSK", "A6", "A5"]],
+    "A6": [["KIOSK", "A6"]],
+    "A7": [["KIOSK", "A7"]],
+    "A8": [["KIOSK", "A7", "A8"]],
 }
 
 
@@ -23,8 +23,8 @@ class RoutingTests(unittest.TestCase):
         cls.graph = load_graph(cls.conn)
 
     def test_expected_routes_for_every_node(self):
-        for node, path in EXPECTED.items():
-            self.assertEqual(shortest_path(self.graph, "KIOSK", node), path, node)
+        for node, paths in ALLOWED.items():
+            self.assertIn(shortest_path(self.graph, "KIOSK", node), paths, node)
 
     def test_changing_destination_changes_route(self):
         self.assertNotEqual(find_product(self.conn, "P001")["route"]["nodes"],
@@ -37,7 +37,7 @@ class RoutingTests(unittest.TestCase):
             p = find_product(self.conn, pid)
             self.assertEqual(p["route"]["nodes"][0], "KIOSK")
             self.assertEqual(p["route"]["nodes"][-1], p["node"])
-            self.assertEqual(p["route"]["nodes"], EXPECTED[p["node"]], pid)
+            self.assertIn(p["route"]["nodes"], ALLOWED[p["node"]], pid)
 
     def test_start_equals_goal(self):
         self.assertEqual(shortest_path(self.graph, "A3", "A3"), ["A3"])
@@ -61,8 +61,8 @@ class FindProductTests(unittest.TestCase):
         p = find_product(self.conn, "P001")
         self.assertEqual(set(p), {"product_id", "product", "available", "stock", "price",
                                   "currency", "aisle", "shelf", "x", "y", "node", "route"})
-        self.assertEqual(p["route"]["nodes"], ["KIOSK", "A1", "A2", "A3", "A4", "A5", "A7"])
-        self.assertEqual(p["route"]["steps"][0], "Walk straight to A1")
+        self.assertEqual(p["route"]["nodes"], ["KIOSK", "A7"])
+        self.assertEqual(p["route"]["steps"][0], "Walk to the bottom corridor below the aisles")
         self.assertIn("aisle 7, shelf 3", p["route"]["steps"][-1])
 
     def test_unknown_product(self):

@@ -130,4 +130,6 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
             raise ApiError(404, "UNKNOWN_AUDIO", "No such audio file")
         return FileResponse(f, media_type="audio/mpeg")
 
+    from fastapi.staticfiles import StaticFiles
+    app.mount("/", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "..", "kiosk"), html=True), name="kiosk")
     return app

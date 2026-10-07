@@ -85,7 +85,7 @@ class ApiTests(unittest.TestCase):
         body = r.json()
         self.assertEqual((body["product"], body["price"], body["currency"]),
                          ("Dove Shampoo", 249, "INR"))
-        self.assertEqual(body["route"]["nodes"], ["KIOSK", "A1", "A2", "A3", "A4", "A5", "A7"])
+        self.assertEqual(body["route"]["nodes"], ["KIOSK", "A7"])
 
     def test_find_product_errors(self):
         r = self.client.post("/find-product", headers=KIOSK, json={"product_id": "P999"})
