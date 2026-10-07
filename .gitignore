@@ -18,3 +18,4 @@ tests/audio/private/
 .venv/
 .pytest_cache/
 backend/tts_cache/
+*.bak*
