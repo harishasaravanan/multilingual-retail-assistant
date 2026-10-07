@@ -19,3 +19,4 @@ tests/audio/private/
 .pytest_cache/
 backend/tts_cache/
 *.bak*
+*.bak*
