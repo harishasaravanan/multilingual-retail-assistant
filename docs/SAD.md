@@ -18,7 +18,7 @@
 ### Changes from v2.0
 - Scope tiers rewritten: Tier 1 is the mandatory MVP; Tier 2 is polish. No contradictions between sections.
 - Local STT fallback, confirmation flow, alternatives, admin dashboard, analytics, Docker, BLE provisioning and advanced phonetic matching moved to Tier 2. Basic alias + fuzzy matching stays in Tier 1.
-- Spoken reply through a speaker is explicit, and the spoken reply includes price details (price is not screen-only).
+- Spoken reply through a speaker is explicit, and the spoken reply covers product, availability and location. Price and stock count are not spoken or shown; the screen shows availability only.
 - Wi-Fi wording corrected (no special "Wi-Fi 6 streaming protocol" implied).
 - Hardware risk added: microphone function and board revision check.
 - Latency budget wording corrected (stage sum vs acceptance target).
@@ -34,7 +34,7 @@
 
 ## 1. Executive Summary
 
-A voice-enabled retail kiosk. A customer presses a button (or speaks, with VAD) and asks for a product in English, Tamil, Hindi or Tanglish. The SiWx917 captures audio, detects speech on-device, and streams it over secure IP (Wi-Fi) to a backend. The backend performs STT, language ID, normalization, product matching, database lookup and route calculation. The kiosk shows the result and highlighted route on screen **and speaks the answer, including price, through the kiosk host speaker**.
+A voice-enabled retail kiosk. A customer presses a button (or speaks, with VAD) and asks for a product in English, Tamil, Hindi or Tanglish. The SiWx917 captures audio, detects speech on-device, and streams it over secure IP (Wi-Fi) to a backend. The backend performs STT, language ID, normalization, product matching, database lookup and route calculation. The kiosk shows the result and highlighted route on screen **and speaks the answer (product, availability, aisle/shelf) through the kiosk host speaker**.
 
 Heavy AI stays on the backend for the MVP. The SiWx917 is a real embedded component: audio capture, pre-processing, VAD, secure streaming, status feedback.
 
@@ -51,8 +51,8 @@ Heavy AI stays on the backend for the MVP. The SiWx917 is a real embedded compon
 - Normalization, alias table (multi-script), basic fuzzy matching.
 - Database: product, price, stock, aisle, shelf, coordinates.
 - Route calculation from fixed kiosk on a graph; step-by-step route text.
-- Kiosk UI: product, availability, stock, price, aisle/shelf, highlighted route.
-- Basic TTS reply through the kiosk host speaker, including price.
+- Kiosk UI: product, availability (in stock / out of stock), aisle/shelf, highlighted route.
+- Basic TTS reply through the kiosk host speaker (no price).
 - Basic error handling: unknown, out-of-stock, low-confidence (ask to repeat), network failure.
 - Status feedback: RGB LED states.
 - Structured logging and measured metrics.
@@ -94,7 +94,7 @@ Heavy AI stays on the backend for the MVP. The SiWx917 is a real embedded compon
 | R9 | 1 | Latency | p50 < 3 s and p95 < 5 s from end-of-user-speech to first visible result and start of spoken response |
 | R10 | 1 | Measured results | All metrics from real tests, test set published |
 | R11 | 1 | Security documented and implemented | TLS, device authentication, least-privilege API |
-| R12 | 1 | Spoken reply | Reply played through the kiosk host speaker in the selected reply language according to the language policy (§7.4); includes product, availability, location and price |
+| R12 | 1 | Spoken reply | Reply played through the kiosk host speaker in the selected reply language according to the language policy (§7.4); includes product, availability and location |
 | R13 | 2 | BLE provisioning | Wi-Fi credentials set from phone without reflashing |
 
 ---
@@ -317,10 +317,10 @@ Response
 Other endpoints: `/health`; `/admin/*` (Tier 2, auth required).
 
 ### 7.7 Kiosk UI, TTS and Speaker
-- Screen shows: product, availability, stock, **price**, aisle/shelf, highlighted route, step-by-step text.
-- Spoken reply in the selected reply language (§7.4) includes: product name, availability, aisle and shelf, **price**, and a pointer to the route on screen.
-  Example: "Dove Shampoo is available in aisle 7, shelf 3. Price is 249 rupees. Follow the route on the screen."
-- Price is therefore both displayed and spoken. Amount and currency come from the same result object (249 INR is shown as ₹249 and spoken as "249 rupees" in the reply language).
+- Screen shows: product, availability (in stock / out of stock), aisle/shelf, highlighted route on a pictorial store map, step-by-step text.
+- Spoken reply in the selected reply language (§7.4) includes: product name, availability, aisle and shelf, and a pointer to the route on screen.
+  Example: "Dove Shampoo is available in aisle 7, shelf 3. Follow the route on the screen."
+- Price and stock count stay in the data model and API but are neither displayed nor spoken. Screen and voice come from the same result object.
 - Error voices: out-of-stock ("currently unavailable"), not found, please repeat, network unavailable.
 - States: listening, processing, result, out-of-stock, not found, please repeat, offline.
 - Tier 2: confirmation screen, alternatives, large text mode, voice-only mode.
@@ -335,7 +335,7 @@ Other endpoints: `/health`; `/admin/*` (Tier 2, auth required).
 | name | Dove Shampoo | Display and spoken name |
 | aliases | table: alias, script, language | Recognition variants |
 | category | Personal Care | Grouping |
-| price | 249 | Shown on screen and spoken |
+| price | 249 | Stored in the data model; not shown or spoken |
 | currency | INR | Display symbol and spoken unit |
 | stock | 12 | Quantity |
 | aisle / shelf | 7 / 3 | Physical location |
@@ -432,7 +432,7 @@ Repository rules:
 | 3 | STT, language ID, normalizer, matcher | 8-10 days | English set met; Hindi, Tamil, Tanglish measured; matcher resolves aliases across scripts |
 | 4 | DB + backend API | 3-4 days | `/voice-query/start`, `/chunk`, `/end` and `/find-product` return correct data for all catalog items |
 | 5 | Map + routing | 3-5 days | Route correct for 10 test destinations |
-| 6 | UI + TTS + speaker | 4-5 days | All UI states reachable; spoken reply (with price) plays in 3 languages |
+| 6 | UI + TTS + speaker | 4-5 days | All UI states reachable; spoken reply plays in 3 languages |
 | 7 | Integration, evaluation | 7-10 days | Full workflow repeats; metrics table complete; noise and network tests done |
 | 8 | Tier 2 items (as time allows) | variable | Each Tier 2 feature has its own pass test; BLE provisioning, admin, fallback STT, etc. |
 
@@ -485,7 +485,7 @@ Record test logs and results as artifacts at every gate. Do not proceed if the g
 | Noise | Quiet, store-like, loud | Accuracy drop per level |
 | Network | Weak signal, drop, reconnect | Recovery time |
 | Device resources | RAM, flash, CPU | Reported |
-| Spoken reply | Correct language, content includes price, matches screen | 100% match on test set |
+| Spoken reply | Correct language, content matches screen (product, availability, location) | 100% match on test set |
 | Failure cases | Unknown, out-of-stock, low-confidence, offline | All handled, screen and voice |
 | Usability (optional) | 10 users, SUS; kiosk vs manual search time | Reported |
 
@@ -503,7 +503,7 @@ Targets are goals, not promises; always report measured values.
 | M3 | All four language styles resolve to product IDs; measured |
 | M4 | DB-driven price, stock, location |
 | M5 | Correct routes and step text |
-| M6 | UI and spoken reply (with price) complete with all states |
+| M6 | UI and spoken reply complete with all states |
 | M7 | Full workflow repeats; metrics, noise and network tests complete |
 | M8 | Tier 2 features (optional, each tested) |
 
@@ -516,8 +516,8 @@ Targets are goals, not promises; always report measured values.
 - Backend identifies the product with a confidence score.
 - Database provides stock, price and location.
 - Route and step text are generated from the fixed kiosk.
-- Route shows on the map; price, stock and location are on screen.
-- The answer, including price, is spoken through a speaker.
+- Route shows on the map; availability and location are on screen.
+- The answer (product, availability, location) is spoken through a speaker.
 - English, Tamil, Hindi and Tanglish are demonstrated.
 - Out-of-stock, unknown, low-confidence and network failures are handled on screen and by voice.
 - Latency, accuracy, noise and network results are measured and reported.
@@ -531,7 +531,7 @@ Targets are goals, not promises; always report measured values.
 
 | Tier | Features | Status |
 |---|---|---|
-| 1 MVP | Voice capture, VAD/PTT, Wi-Fi/TLS streaming, 4 language styles, product search, DB, stock/price/location, route, UI, basic TTS via kiosk host speaker (price included), basic error handling, metrics | Mandatory |
+| 1 MVP | Voice capture, VAD/PTT, Wi-Fi/TLS streaming, 4 language styles, product search, DB, stock/price/location, route, UI, basic TTS via kiosk host speaker (no price), basic error handling, metrics | Mandatory |
 | 2 Polished | Advanced fuzzy/phonetic matching, confirmation flow, alternatives, BLE provisioning, admin dashboard, analytics, local STT fallback, Docker, noise suppression, board-side speaker, weighted routing, ETA, accessibility | Recommended |
 | 3 Advanced | Multi-item routes, category queries, offers/discounts, QR handoff, wake word, signed OTA, more languages | Future |
 | 4 Research | Indoor positioning, personalization, edge STT, multi-store sync | Future |
@@ -546,8 +546,8 @@ Targets are goals, not promises; always report measured values.
 | Tanglish | Dove shampoo enga irukku? | FIND -> P001 |
 
 ```
-Found:        Screen: product, stock, price, aisle/shelf, route.
-              Voice: "Dove Shampoo is in aisle 7, shelf 3. Price is 249 rupees."
+Found:        Screen: product, availability, aisle/shelf, route.
+              Voice: "Dove Shampoo is available in aisle 7, shelf 3."
 Out-of-stock: "Dove Shampoo is currently unavailable."
 Unknown:      "I could not find that product in this store."
 Low-conf:     "Sorry, please say that again."
@@ -573,4 +573,4 @@ Offline:      "Network unavailable. Please try again."
 
 ## Architecture Decision Summary
 
-The SiWx917 serves as an embedded voice front-end (capture, pre-processing, VAD, secure streaming, status), while speech intelligence, matching, retail data, routing and TTS stay on the backend. The device sends only audio; the backend resolves the product ID. Answers are shown on screen and spoken through a speaker, with price in both. Tier 1 is a lean, reliable core; Tier 2 features are added only after Tier 1 passes its gates.
+The SiWx917 serves as an embedded voice front-end (capture, pre-processing, VAD, secure streaming, status), while speech intelligence, matching, retail data, routing and TTS stay on the backend. The device sends only audio; the backend resolves the product ID. Answers are shown on screen and spoken through a speaker; price is kept in the data only. Tier 1 is a lean, reliable core; Tier 2 features are added only after Tier 1 passes its gates.
