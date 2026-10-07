@@ -19,7 +19,7 @@ _TEXT = {
         "ERROR": "Sorry, something went wrong. Please try again.",
     },
     "ta": {
-        "OK": "{product} இடைகழி {aisle}, அடுக்கு {shelf} இல் உள்ளது. "
+        "OK": "{product} நடைபாதை {aisle}, அடுக்கு {shelf} இல் உள்ளது. "
               "திரையில் உள்ள வழியைப் பின்பற்றவும்.",
         "OUT_OF_STOCK": "{product} தற்போது கிடைக்கவில்லை.",
         "NOT_FOUND": "இந்தப் பொருள் இந்தக் கடையில் கிடைக்கவில்லை.",
