@@ -44,7 +44,7 @@ class PipelineTests(unittest.TestCase):
         for text in ["Where is Dove shampoo?", "Dove shampoo enga irukku?",
                      "डव शैम्पू कहाँ मिलेगा?"]:
             r = self.run_text(text)
-            self.assertIn(str(r["result"]["price"]), r["reply_text"])
+            self.assertNotIn(str(r["result"]["price"]), r["reply_text"])
             self.assertIn(str(r["result"]["aisle"]), r["reply_text"])
             self.assertIn(str(r["result"]["shelf"]), r["reply_text"])
 

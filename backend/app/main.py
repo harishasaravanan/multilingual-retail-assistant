@@ -130,6 +130,9 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
             raise ApiError(404, "UNKNOWN_AUDIO", "No such audio file")
         return FileResponse(f, media_type="audio/mpeg")
 
+    if os.environ.get("MRA_TTS_SYNC") == "1":
+        from app.tts.sync import start_background
+        start_background()
     from fastapi.staticfiles import StaticFiles
     app.mount("/", StaticFiles(directory=os.path.join(os.path.dirname(__file__), "..", "..", "kiosk"), html=True), name="kiosk")
     return app

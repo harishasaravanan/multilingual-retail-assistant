@@ -11,7 +11,7 @@ _CURRENCY = {
 
 _TEXT = {
     "en": {
-        "OK": "{product} is available in aisle {aisle}, shelf {shelf}. Price is {price} {unit}. "
+        "OK": "{product} is available in aisle {aisle}, shelf {shelf}. "
               "Follow the route on the screen.",
         "OUT_OF_STOCK": "{product} is currently unavailable.",
         "NOT_FOUND": "I could not find that product in this store.",
@@ -19,13 +19,13 @@ _TEXT = {
         "ERROR": "Sorry, something went wrong. Please try again.",
     },
     "ta": {
-        "OK": "{product} இடைகழி {aisle}, அடுக்கு {shelf} இல் உள்ளது. விலை {price} {unit}. "
+        "OK": "{product} இடைகழி {aisle}, அடுக்கு {shelf} இல் உள்ளது. "
               "திரையில் உள்ள வழியைப் பின்பற்றவும்.",
         "OUT_OF_STOCK": "{product} தற்போது கிடைக்கவில்லை.",
         "NOT_FOUND": "இந்தப் பொருள் இந்தக் கடையில் கிடைக்கவில்லை.",
     },
     "hi": {
-        "OK": "{product} गलियारा {aisle}, शेल्फ {shelf} में उपलब्ध है। कीमत {price} {unit} है। "
+        "OK": "{product} गलियारा {aisle}, शेल्फ {shelf} में उपलब्ध है। "
               "कृपया स्क्रीन पर दिखाए गए रास्ते का अनुसरण करें।",
         "OUT_OF_STOCK": "{product} अभी उपलब्ध नहीं है।",
         "NOT_FOUND": "यह उत्पाद इस स्टोर में नहीं मिला।",
