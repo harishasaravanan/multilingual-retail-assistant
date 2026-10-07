@@ -40,6 +40,11 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
     if dev_transcript is None:
         dev_transcript = os.environ.get("MRA_DEV_TRANSCRIPT") == "1"
 
+    if stt is None and os.environ.get("MRA_STT") == "whisper":
+        from app import stt_whisper
+        stt_whisper._get()  # load the model at startup (about 17 s)
+        stt = stt_whisper.transcribe
+
     conn = conn or build_db()  # in-memory DB seeded from database/*.csv
     pipeline = Pipeline(conn)
     sessions = SessionManager(pipeline, stt=stt)
