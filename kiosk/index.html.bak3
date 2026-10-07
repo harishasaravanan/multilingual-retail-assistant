@@ -1,0 +1,91 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Kiosk</title>
+<style>
+body{font-family:sans-serif;margin:0;background:#111;color:#eee;text-align:center}
+#st{padding:12px;font-size:22px;background:#555}
+#st.listening{background:#1565c0}#st.processing{background:#ef6c00}#st.result{background:#2e7d32}
+#st.out-of-stock,#st.not-found,#st.please-repeat{background:#f9a825;color:#000}#st.offline{background:#c62828}
+#main{padding:20px;font-size:28px;white-space:pre-line}#route{font-size:18px;white-space:pre-line}
+</style>
+<div id=st>idle</div><div id=main></div><div id=map></div><div id=route></div>
+<p><input id=q value="Dove shampoo enga irukku?" size=30> <button onclick=ask()>Ask</button></p>
+<script>
+const K="dev-kiosk", D="dev-device", $=i=>document.getElementById(i);
+const hdr=t=>({Authorization:"Bearer "+t});
+const sym=c=>c==="INR"?"₹":c+" ";
+const MAP={OK:"result",OUT_OF_STOCK:"out-of-stock",NOT_FOUND:"not-found",LOW_CONFIDENCE:"please-repeat",ERROR:"offline"};
+function state(s){$("st").className=s;$("st").textContent=s.replaceAll("-"," ")}
+
+const POS={A1:[50,60],A2:[140,60],A3:[230,60],A4:[320,60],A5:[50,150],A6:[140,150],A7:[230,150],A8:[320,150],KIOSK:[185,255]};
+function pathFor(d){
+  const [x,y]=POS[d]; const top=y<100;
+  const p=[[185,235],[185,210]];
+  if(top) p.push([185,110],[x,110],[x,90]);
+  else p.push([x,210],[x,180]);
+  return p.map(q=>q.join(",")).join(" ");
+}
+function drawMap(nodes){
+  let g='<svg viewBox="0 0 400 300" width="420" style="background:#1b1b1b;border-radius:8px">';
+  for(const k in POS){ if(k==="KIOSK")continue;
+    const [x,y]=POS[k], dest=nodes&&nodes[nodes.length-1]===k;
+    g+='<rect x="'+(x-35)+'" y="'+(y-30)+'" width="70" height="60" rx="6" fill="'+(dest?'#2e7d32':'#333')+'" stroke="#666"/>'
+     +'<text x="'+x+'" y="'+(y+5)+'" fill="#fff" font-size="16" text-anchor="middle">'+k+'</text>';
+  }
+  g+='<text x="200" y="110" fill="#777" font-size="11" text-anchor="middle">WALKWAY</text>';
+  g+='<rect x="145" y="235" width="80" height="40" rx="6" fill="#1565c0"/><text x="185" y="260" fill="#fff" font-size="14" text-anchor="middle">KIOSK</text>';
+  if(nodes){
+    const pts=pathFor(nodes[nodes.length-1]);
+    g+='<polyline points="'+pts+'" fill="none" stroke="#ffeb3b" stroke-width="4" stroke-dasharray="8 4"/>';
+  }
+  $("map").innerHTML=g+'</svg>';
+}
+function show(p){
+  state(MAP[p.status]||"offline");
+  const r=p.result||{};
+  $("main").textContent=r.product
+    ? r.product+"\n"+(r.available?"✔ In stock":"✖ Out of stock")+"\nAisle "+r.aisle+", Shelf "+r.shelf
+    : (p.reply_text||"");
+  drawMap(r.route?r.route.nodes:null);
+  $("route").textContent=r.route?r.route.steps.join("\n"):"";
+  if(p.tts_audio_url) play(p.tts_audio_url);
+}
+
+async function play(url){
+  try{
+    const b=await (await fetch(url,{headers:hdr(K)})).blob();
+    new Audio(URL.createObjectURL(b)).play();
+  }catch(e){console.error(e)}
+}
+
+async function listen(){
+  try{
+    const res=await fetch("/kiosk/events",{headers:hdr(K)});
+    const rd=res.body.getReader(), dec=new TextDecoder(); let buf="";
+    while(true){
+      const {value,done}=await rd.read(); if(done)break;
+      buf+=dec.decode(value,{stream:true});
+      let i;
+      while((i=buf.indexOf("\n\n"))>=0){
+        const blk=buf.slice(0,i); buf=buf.slice(i+2);
+        let ev="message", data="";
+        for(const l of blk.split("\n")){
+          if(l.startsWith("event:"))ev=l.slice(6).trim();
+          else if(l.startsWith("data:"))data+=l.slice(5).trim();
+        }
+        if(!data)continue;
+        const d=JSON.parse(data);
+        if(ev==="state")state(d.state);
+        else if(ev==="result")show(d);
+      }
+    }
+  }catch(e){console.error(e)}
+  state("offline"); setTimeout(listen,2000);
+}
+
+async function ask(){
+  const s=await (await fetch("/voice-query/start",{method:"POST",headers:hdr(D)})).json();
+  await fetch("/voice-query/"+s.session_id+"/end",{method:"POST",
+    headers:{...hdr(D),"Content-Type":"application/json"},
+    body:JSON.stringify({transcript:$("q").value})});
+}
+listen();
+</script>
