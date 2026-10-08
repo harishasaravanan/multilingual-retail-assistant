@@ -17,6 +17,19 @@ MAX_UTTERANCE_BYTES = 15 * 16000 * 2  # 15 s of 16 kHz 16-bit mono
 MAX_CHUNK_BYTES = 64 * 1024
 
 
+def _log_timing(rid, stt_s, proc_s):
+    import pathlib
+    d = pathlib.Path(__file__).resolve().parents[2] / "results" / "latency"
+    d.mkdir(parents=True, exist_ok=True)
+    f = d / "latency.csv"
+    new = not f.exists()
+    with f.open("a") as fh:
+        if new:
+            fh.write("request_id,stt_s,process_s,total_s\n")
+        fh.write(f"{rid},{stt_s:.3f},{proc_s:.3f},{stt_s + proc_s:.3f}\n")
+    return {"stt_s": round(stt_s, 3), "process_s": round(proc_s, 3)}
+
+
 class ApiError(Exception):
     def __init__(self, status_code, error, message):
         super().__init__(message)
@@ -112,7 +125,10 @@ class SessionManager:
             if transcript is None:
                 if self.stt is None:
                     raise RuntimeError("no STT configured")
-                transcript = self.stt(bytes(s["audio"]))
-            return self.pipeline.process(rid, transcript)
+                _t0 = time.perf_counter(); transcript = self.stt(bytes(s["audio"])); self.last_stt = time.perf_counter() - _t0
+            _t1 = time.perf_counter(); out = self.pipeline.process(rid, transcript)
+            out["timings"] = _log_timing(rid, getattr(self, "last_stt", 0.0), time.perf_counter() - _t1)
+            self.last_stt = 0.0
+            return out
         except Exception:
             return self.pipeline.error(rid)
