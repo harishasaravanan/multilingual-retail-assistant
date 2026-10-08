@@ -43,3 +43,15 @@ function onList(d){
   $("main").textContent="Heard: "+(d.heard||"")+"\n→ "+(d.product||d.status);
 }
 (function(){const b=document.createElement("button");b.textContent="Start list";b.onclick=listStart;$("cartbar").prepend(b," ");})();
+const MSG={LOW_CONFIDENCE:"Not sure. Please say the full product name.",NOT_FOUND:"Not found in this store.",ERROR:"Something went wrong. Please try again.",OUT_OF_STOCK:"Added (currently out of stock)",OK:"Added"};
+onList=function(d){
+  renderCart({items:d.items});
+  if(d.done){ cartRoute(); return; }
+  state("listening");
+  $("main").textContent="Heard: "+(d.heard||"")+"\n"+(d.product?d.product+" — ":"")+(MSG[d.status]||d.status);
+};
+let idleT=null;
+function resetIdle(){ clearTimeout(idleT); idleT=setTimeout(async()=>{ await cartClear(); $("main").textContent=""; $("map").innerHTML=""; $("route").textContent=""; state("idle"); },180000); }
+["click","keydown"].forEach(e=>document.addEventListener(e,resetIdle));
+resetIdle();
+(function(){const b=document.createElement("button");b.textContent="New customer";b.onclick=()=>{cartClear();$("main").textContent="";$("map").innerHTML="";$("route").textContent="";state("idle")};$("cartbar").append(" ",b);})();
