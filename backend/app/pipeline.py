@@ -18,6 +18,9 @@ MAX_CHUNK_BYTES = 64 * 1024
 
 
 def _log_timing(rid, stt_s, proc_s):
+    import os
+    if os.environ.get("MRA_LATENCY_LOG") != "1":
+        return {"stt_s": round(stt_s, 3), "process_s": round(proc_s, 3)}
     import pathlib
     d = pathlib.Path(__file__).resolve().parents[2] / "results" / "latency"
     d.mkdir(parents=True, exist_ok=True)

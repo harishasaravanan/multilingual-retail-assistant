@@ -135,6 +135,47 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
             raise ApiError(404, "UNKNOWN_AUDIO", "No such audio file")
         return FileResponse(f, media_type="audio/mpeg")
 
+    from app.cart import Cart
+    cart = Cart(conn)
+
+    async def _pid(request):
+        try:
+            pid = (await request.json())["product_id"]
+            if not isinstance(pid, str):
+                raise TypeError
+            return pid
+        except (ValueError, KeyError, TypeError):
+            raise ApiError(422, "INVALID_BODY", 'Expected {"product_id": "P001"}')
+
+    @app.get("/cart")
+    async def cart_get(request: Request):
+        need_kiosk(request)
+        return {"items": cart.items()}
+
+    @app.post("/cart/add")
+    async def cart_add(request: Request):
+        need_kiosk(request)
+        if not cart.add(await _pid(request)):
+            raise ApiError(404, "UNKNOWN_PRODUCT", "Unknown product_id")
+        return {"items": cart.items()}
+
+    @app.post("/cart/remove")
+    async def cart_remove(request: Request):
+        need_kiosk(request)
+        cart.remove(await _pid(request))
+        return {"items": cart.items()}
+
+    @app.post("/cart/clear")
+    async def cart_clear(request: Request):
+        need_kiosk(request)
+        cart.clear()
+        return {"items": []}
+
+    @app.get("/cart/route")
+    async def cart_route(request: Request):
+        need_kiosk(request)
+        return cart.route()
+
     if os.environ.get("MRA_TTS_SYNC") == "1":
         from app.tts.sync import start_background
         start_background()
