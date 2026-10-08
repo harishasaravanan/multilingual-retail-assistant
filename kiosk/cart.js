@@ -31,3 +31,15 @@ async function cartRoute(){
   $("route").textContent=r.stops.map((s,i)=>(i+1)+". Aisle "+s.node+": "+s.items.map(t=>t.product+" (shelf "+t.shelf+")").join(", ")).join("\n")+(r.skipped.length?"\nOut of stock: "+r.skipped.join(", "):"");
 }
 kj("GET","/cart").then(renderCart);
+async function listStart(){
+  await kj("POST","/list/start"); renderCart({items:[]});
+  state("listening"); $("main").textContent="List mode: say items, then say 'done'";
+  $("map").innerHTML=""; $("route").textContent="";
+}
+function onList(d){
+  renderCart({items:d.items});
+  if(d.done){ cartRoute(); return; }
+  state("listening");
+  $("main").textContent="Heard: "+(d.heard||"")+"\n→ "+(d.product||d.status);
+}
+(function(){const b=document.createElement("button");b.textContent="Start list";b.onclick=listStart;$("cartbar").prepend(b," ");})();

@@ -103,7 +103,19 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
         sessions.check(session_id)
         broker.publish("state", {"state": "processing"})
         payload = sessions.end(session_id, transcript=transcript)
-        broker.publish("result", payload)
+        if list_state["on"]:
+            import re as _re
+            toks = set(_re.findall(r"\w+", (payload.get("transcript") or "").lower()))
+            done = bool(toks & END_WORDS)
+            if not done and payload.get("product_id") and payload["status"] in ("OK", "OUT_OF_STOCK"):
+                cart.add(payload["product_id"])
+            if done:
+                list_state["on"] = False
+            r = payload.get("result") or {}
+            broker.publish("list", {"heard": payload.get("transcript"), "status": payload["status"],
+                                    "product": r.get("product"), "items": cart.items(), "done": done})
+        else:
+            broker.publish("result", payload)
         return payload
 
     @app.post("/find-product")
@@ -137,6 +149,15 @@ def create_app(device_token=None, kiosk_token=None, conn=None, stt=None, dev_tra
 
     from app.cart import Cart
     cart = Cart(conn)
+    END_WORDS = {"done", "mudinchu", "mudinjathu", "bas", "basa", "khatam", "முடிந்தது", "முடிஞ்சது", "बस", "खत्म"}
+    list_state = {"on": False}
+
+    @app.post("/list/start")
+    async def list_start(request: Request):
+        need_kiosk(request)
+        cart.clear()
+        list_state["on"] = True
+        return {"list": True}
 
     async def _pid(request):
         try:

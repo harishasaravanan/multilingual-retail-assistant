@@ -82,6 +82,7 @@ async function listen(){
         const d=JSON.parse(data);
         if(ev==="state")state(d.state);
         else if(ev==="result")show(d);
+        else if(ev==="list")onList(d);
       }
     }
   }catch(e){console.error(e)}

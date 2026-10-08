@@ -132,6 +132,7 @@ class SessionManager:
             _t1 = time.perf_counter(); out = self.pipeline.process(rid, transcript)
             out["timings"] = _log_timing(rid, getattr(self, "last_stt", 0.0), time.perf_counter() - _t1)
             self.last_stt = 0.0
+            out["transcript"] = transcript
             return out
         except Exception:
             return self.pipeline.error(rid)
