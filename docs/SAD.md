@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | Document ID | MRA-SW917-SAD-002 |
-| Version | 2.2 (supersedes 2.1) |
+| Version | 2.3 (supersedes 2.2) |
 | Status | Proposed / Implementation Ready |
 | Target Platform | SiWx917-DK2605A (BRD2605A) |
 | Connectivity | Wi-Fi 6-capable wireless connectivity with secure IP transport; BLE |
@@ -293,7 +293,7 @@ Response
   "reply_language": "ta",
   "product_id": "P001", "confidence": 0.93,
   "result": { ...see below... },
-  "tts_audio_url": "/tts/abc123.wav"
+  "tts_audio_url": "/tts/abc123.mp3"
 }
 ```
 
@@ -382,7 +382,7 @@ KIOSK -> A1 -> A2 -> A3 -> A4 -> A5 -> A7/S3
 |---|---|---|
 | Embedded | SiWx917 SDK / Simplicity Studio | Firmware |
 | Backend | Python (FastAPI) or Node.js | API |
-| Speech | Cloud STT (single path) | Transcript, language |
+| Speech | Local Whisper medium (deviation from cloud STT; see results) | Transcript, language |
 | Matching | rapidfuzz or similar | Product ID, confidence |
 | Database | SQLite or PostgreSQL | Retail data |
 | Routing | NetworkX or custom | Path |
@@ -456,7 +456,7 @@ Record test logs and results as artifacts at every gate. Do not proceed if the g
 | Wrong stock or price | DB issue | Direct query | Controlled test inventory |
 | Wrong route | Graph error | Print path nodes | Validate graph connectivity |
 | No sound / wrong language TTS | Speaker, TTS voice | Play test clip per language | Verify output device and TTS voices early |
-| Spoken price differs from screen | Separate data paths | Compare TTS text with JSON | Generate both from the same result object |
+| Spoken text differs from screen | Separate data paths | Compare TTS text with JSON | Generate both from the same result object |
 | Latency over budget | One slow stage | Per-stage timestamps | Streaming STT, caching |
 | Stale UI | State/cache bug | Compare API response | Refresh per request |
 
