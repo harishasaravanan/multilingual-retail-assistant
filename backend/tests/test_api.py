@@ -1,5 +1,7 @@
 """HTTP-level tests. Skipped automatically if fastapi is not installed."""
+import os
 import unittest
+from unittest import mock
 
 try:
     from fastapi.testclient import TestClient
@@ -72,7 +74,9 @@ class ApiTests(unittest.TestCase):
         self.assertEqual((r.status_code, r.json()["error"]), (422, "INVALID_BODY"))
 
     def test_without_dev_flag_and_no_stt_the_status_is_error(self):
-        client, _ = make_client(dev_transcript=False)
+        env = {k: v for k, v in os.environ.items() if k != "MRA_STT"}
+        with mock.patch.dict(os.environ, env, clear=True):
+            client, _ = make_client(dev_transcript=False)
         sid = client.post("/voice-query/start", headers=DEVICE).json()["session_id"]
         r = client.post(f"/voice-query/{sid}/end", headers=DEVICE,
                         json={"transcript": "Dove shampoo"})
