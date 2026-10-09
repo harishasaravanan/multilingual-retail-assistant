@@ -55,7 +55,7 @@ class Matcher:
         if key:
             self.aliases.setdefault(key, set()).add(pid)
 
-    def match(self, transcript):
+    def _match_text(self, transcript):
         q = normalize(transcript).query
         if not q:
             return MatchResult("LOW_CONFIDENCE", None, 0.0, q)
@@ -78,3 +78,11 @@ class Matcher:
         if top < MATCH_MIN or (top - second) < AMBIGUOUS_MARGIN:
             return MatchResult("LOW_CONFIDENCE", None, top, q)
         return MatchResult("OK", top_id, top, q)
+
+    def match(self, transcript):
+        r = self._match_text(transcript)
+        if r.status == "OK" or not any(ord(c) >= 0x0900 for c in transcript):
+            return r  # English and confident matches are never changed
+        from app.matching.phonetic import phonetic_match
+        p = phonetic_match(transcript, self.aliases)
+        return MatchResult("OK", p[0], p[1], getattr(r, "query", transcript)) if p else r

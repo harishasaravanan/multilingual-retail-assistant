@@ -17,6 +17,6 @@ for f in sorted(glob.glob("tests/test_dataset/*.wav")):
     d = c.post(f"{B}/voice-query/{sid}/end", headers=H).json()
     tot[style] += 1
     if d["product_id"] == pid: hit[style] += 1
-    else: misses.append((f, d["status"], d["product_id"]))
+    else: misses.append((os.path.basename(f), d["status"], d["product_id"], d.get("confidence"), d.get("transcript")))
 for s in tot: print(s, f"{hit[s]}/{tot[s]}", f"{100*hit[s]/tot[s]:.0f}%")
 print("MISSES:"); [print(" ", m) for m in misses]
