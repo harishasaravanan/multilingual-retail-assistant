@@ -11,6 +11,11 @@
 | Languages | English, Tamil, Hindi, Tanglish |
 | Output | Kiosk screen + spoken reply through the kiosk host speaker |
 
+### Changes from v2.2
+- STT is local Whisper `medium` (8 threads), a deviation from the cloud STT plan. Language detection is restricted to en/ta/hi.
+- TTS audio is mp3 and `reply_text` is returned with it. Board capture stays 16 kHz WAV/PCM.
+- Latency budget notes the measured server-side time for `medium`.
+
 ### Changes from v2.1
 - Added `node` to the data model; route example made consistent with §9.
 - Tier 1 push channel frozen as SSE; API details moved to `docs/API.md` v1.1.
@@ -228,6 +233,8 @@ All -> intent=FIND, product_id=P001
 
 The 0.6 s margin covers real-world variance. Log every stage to confirm.
 
+Measured note: with local Whisper `medium` the server side alone is about 2.9 s, so STT finalization exceeds the 1.0 s budget and p50 under 3 s end to end is unlikely. Report measured per-stage and end-to-end values; do not claim the target unless measured.
+
 ---
 
 ## 6. Hardware/Software Task Allocation
@@ -271,7 +278,7 @@ The 0.6 s margin covers real-world variance. Log every stage to confirm.
 - Language ID is advisory: it selects the STT hint and the reply voice only. It need not be perfect on mixed-language or Tanglish speech. Product resolution runs on the normalized transcript and alias table, so a wrong language label must not change the matched product.
 - Tanglish is an input style (Tamil with English words, spoken or romanized). Reply language for Tanglish input is Tamil: spoken and on-screen text in Tamil, with brand and product names kept in English. English, Hindi and Tamil inputs get replies in the same language. If language confidence is low, reply in English.
 - Test order: English, Hindi, Tamil, then Tanglish.
-- Local STT fallback is Tier 2. Tier 1 relies on one solid cloud/backend STT path.
+- Local STT fallback is Tier 2. Tier 1 relies on one solid backend STT path (implemented as local Whisper `medium`; cloud STT was the original plan).
 
 ### 7.5 Normalization and Matching
 - Normalizer extracts intent and product phrase from the transcript.
@@ -293,6 +300,7 @@ Response
   "reply_language": "ta",
   "product_id": "P001", "confidence": 0.93,
   "result": { ...see below... },
+  "reply_text": "...",
   "tts_audio_url": "/tts/abc123.mp3"
 }
 ```
