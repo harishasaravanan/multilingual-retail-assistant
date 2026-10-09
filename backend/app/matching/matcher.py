@@ -81,8 +81,13 @@ class Matcher:
 
     def match(self, transcript):
         r = self._match_text(transcript)
-        if r.status == "OK" or not any(ord(c) >= 0x0900 for c in transcript):
-            return r  # English and confident matches are never changed
+        if not any(ord(c) >= 0x0900 for c in transcript):
+            return r  # English is never changed
         from app.matching.phonetic import phonetic_match
         p = phonetic_match(transcript, self.aliases)
-        return MatchResult("OK", p[0], p[1], getattr(r, "query", transcript)) if p else r
+        q = getattr(r, "query", transcript)
+        if r.status == "OK":
+            if p and p[0] != r.product_id:  # the two methods disagree: do not guess
+                return MatchResult("LOW_CONFIDENCE", None, r.confidence, q)
+            return r
+        return MatchResult("OK", p[0], p[1], q) if p else r

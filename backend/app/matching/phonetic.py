@@ -37,11 +37,15 @@ def skel(word):
 
 def _score(qwords, alias):
     a = " ".join(x for x in map(skel, alias.split()) if x)
+    if len(a.replace(" ", "")) < 2:
+        return 0.0  # one-consonant skeletons are meaningless
     q = [x for x in map(skel, qwords) if x]
     best = 0.0
     for i in range(len(q)):
         for j in range(i + 1, len(q) + 1):
-            best = max(best, SequenceMatcher(None, " ".join(q[i:j]), a).ratio())
+            w = " ".join(q[i:j])
+            if len(w.replace(" ", "")) >= 2:
+                best = max(best, SequenceMatcher(None, w, a).ratio())
     return best
 
 
