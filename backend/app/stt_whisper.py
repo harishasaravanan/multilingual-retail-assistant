@@ -8,7 +8,7 @@ def _get():
     global _model
     if _model is None:
         from faster_whisper import WhisperModel
-        _model = WhisperModel("small", device="cpu", compute_type="int8", cpu_threads=8)
+        _model = WhisperModel(__import__("os").environ.get("MRA_WHISPER_MODEL", "small"), device="cpu", compute_type="int8", cpu_threads=int(__import__("os").environ.get("MRA_WHISPER_THREADS", "8")))
     return _model
 
 def transcribe(pcm: bytes) -> str:
