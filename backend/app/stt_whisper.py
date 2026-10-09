@@ -17,9 +17,9 @@ def transcribe(pcm: bytes) -> str:
         return ""
     audio = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768.0
     m = _get()
-    segs, info = m.transcribe(audio, beam_size=1, vad_filter=True, initial_prompt=PROMPT)
+    _, _, probs = m.detect_language(audio)
+    probs = dict(probs)
+    lang = max(("en", "ta", "hi"), key=lambda l: probs.get(l, 0))
+    segs, _ = m.transcribe(audio, beam_size=1, vad_filter=True, language=lang, initial_prompt=PROMPT)
     segs = list(segs)
-    if info.language not in ("en", "ta", "hi"):  # e.g. Sinhala garbage on Tanglish
-        segs, _ = m.transcribe(audio, beam_size=1, vad_filter=True, language="ta", initial_prompt=PROMPT)
-        segs = list(segs)
     return " ".join(s.text for s in segs).strip()
