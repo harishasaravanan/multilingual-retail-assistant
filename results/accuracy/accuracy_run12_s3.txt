@@ -1,0 +1,13 @@
+en 9/10 90%
+hi 9/10 90%
+ta_en 8/10 80%
+ta 6/10 60%
+MISSES:
+  ('P003_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.65, 'Parlee Jibisket')
+  ('P003_ta_s3.wav', 'OK', 'P035', 1.0, 'Oreo biscuit is ready.')
+  ('P005_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P007_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P014_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P021_en_s3.wav', 'LOW_CONFIDENCE', None, 0.84, 'Dove is bright.')
+  ('P021_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.85, 'Dove Sprite')
+  ('P024_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.86, 'Dove instant coffee')

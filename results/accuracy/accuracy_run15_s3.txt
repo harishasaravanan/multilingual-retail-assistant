@@ -1,0 +1,13 @@
+en 8/10 80%
+hi 9/10 90%
+ta_en 9/10 90%
+ta 6/10 60%
+MISSES:
+  ('P003_ta_s3.wav', 'OK', 'P035', 1.0, 'Oreo biscuit is ready.')
+  ('P005_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P007_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P014_en_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'That is Thum liquid.')
+  ('P014_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P014_ta_s3.wav', 'NOT_FOUND', None, 0.52, 'பெண், துண்டு துண்டு முடியம் Eğerக்கு!')
+  ('P016_ta_en_s3.wav', 'NOT_FOUND', None, 0.38, '5 Dajan')
+  ('P021_en_s3.wav', 'LOW_CONFIDENCE', None, 0.55, 'Dove is bright.')

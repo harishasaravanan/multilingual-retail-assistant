@@ -1,3 +1,4 @@
+import re
 import numpy as np
 
 _model = None
@@ -20,6 +21,14 @@ def transcribe(pcm: bytes) -> str:
     _, _, probs = m.detect_language(audio)
     probs = dict(probs)
     lang = max(("en", "ta", "hi"), key=lambda l: probs.get(l, 0))
-    segs, _ = m.transcribe(audio, beam_size=1, vad_filter=True, language=lang, initial_prompt=PROMPT)
+    segs, _ = m.transcribe(audio, beam_size=1, vad_filter=True, language=lang, initial_prompt=(None if __import__("os").environ.get("MRA_NO_PROMPT") else PROMPT), condition_on_previous_text=False, no_speech_threshold=0.6)
     segs = list(segs)
-    return " ".join(s.text for s in segs).strip()
+    return _strip_echo(" ".join(s.text for s in segs).strip())
+
+_PH = [p.strip(" .").lower() for p in PROMPT.split(",")]
+def _strip_echo(t):
+    if sum(p in t.lower() for p in _PH) < 3:
+        return t
+    for p in _PH:
+        t = re.sub(re.escape(p), "", t, flags=re.I)
+    return re.sub(r"[\s,.]+", " ", t).strip(" ,.")

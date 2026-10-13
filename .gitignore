@@ -24,3 +24,5 @@ tests/test_dataset/*.wav
 archive/
 output.json
 pytest_html_report.html
+tests/*.zip
+tests/fresh_set/audio_s3/

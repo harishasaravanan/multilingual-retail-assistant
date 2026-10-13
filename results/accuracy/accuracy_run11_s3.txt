@@ -1,0 +1,19 @@
+en 9/10 90%
+hi 7/10 70%
+ta_en 7/10 70%
+ta 3/10 30%
+MISSES:
+  ('P003_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.71, 'पालीजी बिस्केट कहा मिलेगा?')
+  ('P003_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Parlee, E.G.Biscuit, Amul milk, Amul cheese, Tata salt, Maggi noodles, Thums Up, sugar, Oreo biscuit.')
+  ('P003_ta_s3.wav', 'OK', 'P035', 1.0, 'Oreo biscuit is ready.')
+  ('P004_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'Thaasirvaatataa enge irukku.')
+  ('P005_ta_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Tata salt, Maggi noodles, Thums Up, sugar, Oreo biscuit.')
+  ('P007_ta_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Maggi noodles, Thums Up, Sugar, Oreo biscuit.')
+  ('P014_hi_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Dove shampoo, Dove conditioner, Amul milk, Amul cheese, Tata salt, Maggi noodles, Thums Up, sugar, Oreo biscuit.')
+  ('P014_ta_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Dove shampoo, Dove conditioner, Amul milk, Amul cheese, Tata salt, Maggi noodles, Thums Up, sugar, Oreo biscuit.')
+  ('P016_hi_s3.wav', 'NOT_FOUND', None, 0.44, 'ताइद डिताजेन कहां मलेगा।')
+  ('P016_ta_en_s3.wav', 'NOT_FOUND', None, 0.43, 'பைட்டு தஜின்டை இருக்கு')
+  ('P016_ta_s3.wav', 'NOT_FOUND', None, 0.42, 'தை திடாஜெண்ட எங்கே இருக்கு.')
+  ('P021_en_s3.wav', 'LOW_CONFIDENCE', None, 0.84, 'Dove is bright.')
+  ('P021_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.85, 'Dove Sprite')
+  ('P024_ta_en_s3.wav', 'OK', 'P041', 1.07, 'Dove instant coffee, Amul butter, Amul milk, Amul milk, Amul cheese, Tata salt, Maggi noodles, Thums Up, sugar, Oreo biscuit.')

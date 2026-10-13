@@ -3,7 +3,7 @@ H = {"Authorization": "Bearer dev-device"}
 B = "http://127.0.0.1:8000"
 c = httpx.Client(timeout=60)
 hit, tot, misses = collections.Counter(), collections.Counter(), []
-for f in sorted(glob.glob("tests/test_dataset/*.wav")):
+for f in sorted(glob.glob((sys.argv[1] if len(sys.argv)>1 else "tests/test_dataset")+"/*.wav")):
     parts = os.path.basename(f)[:-4].split("_")
     if len(parts) < 3 or not parts[0].startswith("P"):
         print("skip (bad name):", f); continue

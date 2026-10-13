@@ -1,0 +1,16 @@
+en 8/10 80%
+hi 9/10 90%
+ta_en 7/10 70%
+ta 5/10 50%
+MISSES:
+  ('P003_ta_s3.wav', 'OK', 'P035', 1.0, 'Oreo biscuit is ready.')
+  ('P005_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P007_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P014_en_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'That is Thum liquid.')
+  ('P014_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P014_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P016_ta_en_s3.wav', 'NOT_FOUND', None, 0.32, '5,000,000,000,000,000,000,000,000')
+  ('P021_en_s3.wav', 'LOW_CONFIDENCE', None, 0.55, 'Dove is bright.')
+  ('P021_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'Sprite')
+  ('P021_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'Dove Sprite')
+  ('P024_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.76, 'Dove instant coffee')

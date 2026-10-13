@@ -1,0 +1,16 @@
+en 8/10 80%
+hi 10/10 100%
+ta_en 6/10 60%
+ta 5/10 50%
+MISSES:
+  ('P003_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'பார்லீ, ஜிபிஸ்கேட்டை இங்கே இருக்கு')
+  ('P003_ta_s3.wav', 'OK', 'P035', 0.86, 'and here is the biscuit')
+  ('P005_en_s3.wav', 'NOT_FOUND', None, 0.44, 'वेरिस्टाटा साल्ट।')
+  ('P007_ta_s3.wav', 'NOT_FOUND', None, 0.47, 'மாய்யு மூடல்ஸ் எங்கே இருக்கு?')
+  ('P014_ta_s3.wav', 'OK', 'P002', 0.86, 'இந்த வாஸ் லிக்குட் ஏன் இருக்கு?')
+  ('P016_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.65, 'பைட்டுடாஜிண்டையுக்கு')
+  ('P016_ta_s3.wav', 'NOT_FOUND', None, 0.46, 'இந்த இட்டார்ஜென்று இங்கே இருக்கு')
+  ('P021_en_s3.wav', 'NOT_FOUND', None, 0.47, 'Where is pride?')
+  ('P021_ta_en_s3.wav', 'NOT_FOUND', None, 0.4, 'பிரைட் எங்கே இருக்கு?')
+  ('P021_ta_s3.wav', 'NOT_FOUND', None, 0.46, 'இங்கே இருக்கும் சுற்று')
+  ('P024_ta_en_s3.wav', 'NOT_FOUND', None, 0.5, 'காப்பி அங்கர்த்துருக்கிறது.')

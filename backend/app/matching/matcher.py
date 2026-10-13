@@ -35,7 +35,7 @@ def _score(query_tokens, alias):
         for j in range(i + 1, n + 1):
             window = " ".join(query_tokens[i:j])
             s = SequenceMatcher(None, window, alias).ratio()
-            if len(window) >= 4 and set(query_tokens[i:j]) <= alias_words:
+            if len(window) >= 4 and _cov(query_tokens[i:j], alias) > 0.5 and set(query_tokens[i:j]) <= alias_words:
                 s = max(s, MATCH_MIN + 0.10 * len(window) / len(alias))
             if s > best:
                 best = s
@@ -91,3 +91,8 @@ class Matcher:
                 return MatchResult("LOW_CONFIDENCE", None, r.confidence, q)
             return r
         return MatchResult("OK", p[0], p[1], q) if p else r
+
+
+def _cov(window_tokens, alias):
+    words = [w for w in alias.split() if not any(c.isdigit() for c in w)]
+    return sum(w in window_tokens for w in words) / len(words) if words else 1.0
