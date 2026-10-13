@@ -1,0 +1,22 @@
+en 6/10 60%
+hi 7/10 70%
+ta_en 5/10 50%
+ta 5/10 50%
+MISSES:
+  ('P003_en_s3.wav', 'LOW_CONFIDENCE', None, 0.79, 'Where is Pari Biscuit?')
+  ('P003_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.74, 'பார்லீட்ஜி விஸ்கேட் ஏங்கே இருக்கு?')
+  ('P003_ta_s3.wav', 'OK', 'P035', 1.0, 'Oreo biscuit painting and chocolate.')
+  ('P004_en_s3.wav', 'LOW_CONFIDENCE', None, 0.56, "Where is Asher Bhat's Aata?")
+  ('P004_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.71, 'Asherwaj atta.')
+  ('P004_ta_s3.wav', 'NOT_FOUND', None, 0.53, 'Ha, shit, the bath, ah, thought, in the gay, it looked good.')
+  ('P005_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P007_en_s3.wav', 'LOW_CONFIDENCE', None, 0.78, 'Where is my noodles?')
+  ('P007_ta_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Maggi noodles and Oreo biscuit.')
+  ('P014_en_s3.wav', 'NOT_FOUND', None, 0.47, 'That is Jim Lickwood.')
+  ('P014_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.55, 'दिर्दिश्वाश्य लिए ग्रेट कहां में रहा गा।')
+  ('P014_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.62, 'Then, dishwash the food and get it clean.')
+  ('P014_ta_s3.wav', 'NOT_FOUND', None, 0.53, 'When you just wash your food, anyway it is good.')
+  ('P016_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.75, 'Dove detergent.')
+  ('P016_ta_en_s3.wav', 'NOT_FOUND', None, 0.33, '5,000 வெள்ளி இருக்கிறது.')
+  ('P024_hi_s3.wav', 'NOT_FOUND', None, 0.4, 'रू इंस्टेन काफी कहा मिलेगा।')
+  ('P024_ta_s3.wav', 'NOT_FOUND', None, 0.5, 'Do you want some coffee? I need to go to the toilet.')

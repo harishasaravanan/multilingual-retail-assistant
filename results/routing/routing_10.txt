@@ -1,0 +1,20 @@
+== P003
+Parle-G Biscuits 2 ['KIOSK', 'A6', 'A2']
+== P004
+Aashirvaad Atta 5kg 4 ['KIOSK', 'A7', 'A3', 'A4']
+== P005
+Tata Salt 1kg 4 ['KIOSK', 'A7', 'A3', 'A4']
+== P006
+Amul Butter 5 ['KIOSK', 'A6', 'A5']
+== P007
+Maggi Noodles 2 ['KIOSK', 'A6', 'A2']
+== P010
+Britannia Bread 3 ['KIOSK', 'A7', 'A3']
+== P014
+Vim Dishwash Liquid 6 ['KIOSK', 'A6']
+== P016
+Tide Detergent 1kg 6 ['KIOSK', 'A6']
+== P021
+Sprite 750ml 1 ['KIOSK', 'A6', 'A2', 'A1']
+== P024
+Bru Instant Coffee 100g 3 ['KIOSK', 'A7', 'A3']

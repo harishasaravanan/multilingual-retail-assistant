@@ -1,0 +1,21 @@
+en 6/10 60%
+hi 9/10 90%
+ta_en 6/10 60%
+ta 3/10 30%
+MISSES:
+  ('P003_ta_s3.wav', 'OK', 'P035', 1.0, "Bobbi's, Oreo biscuit, Andy and her friends.")
+  ('P004_en_s3.wav', 'NOT_FOUND', None, 0.5, 'Where this ashes was found.')
+  ('P004_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.59, 'I should walk out that way.')
+  ('P004_ta_s3.wav', 'NOT_FOUND', None, 0.5, 'Ah, shit, I thought I thought I knew there is a good...')
+  ('P005_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Tata salt and Maggi noodles.')
+  ('P005_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P007_en_s3.wav', 'NOT_FOUND', None, 0.45, 'Where is my universe?')
+  ('P007_ta_s3.wav', 'LOW_CONFIDENCE', None, 1.0, 'Maggi noodles and Oreo biscuit.')
+  ('P014_en_s3.wav', 'NOT_FOUND', None, 0.53, 'That is very liquid.')
+  ('P014_hi_s3.wav', 'NOT_FOUND', None, 0.48, 'दिम देख वाश्वरी लिख्रेट कहां नेगा।')
+  ('P014_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.61, 'Then, dish wash with water.')
+  ('P014_ta_s3.wav', 'NOT_FOUND', None, 0.53, "You don't need to wash your food any day with this.")
+  ('P016_en_s3.wav', 'LOW_CONFIDENCE', None, 0.69, 'Where is 5 detergent?')
+  ('P016_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.55, 'I need the bathroom, then we go in the car.')
+  ('P021_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.62, 'Fried egg and a bit of milk.')
+  ('P024_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.62, 'And some coffee and a little bit of milk.')

@@ -1,0 +1,4 @@
+en WER 33% 10 clips
+hi WER 74% 10 clips
+ta_en WER 69% 10 clips
+ta WER 90% 10 clips
