@@ -1,0 +1,205 @@
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.000  pts=0.000
+  size=4096
+detected 28 logical cores
+[graph_0_in_0_0 @ 0x622a4c2fd340] Setting 'time_base' to value '1/16000'
+[graph_0_in_0_0 @ 0x622a4c2fd340] Setting 'sample_rate' to value '16000'
+[graph_0_in_0_0 @ 0x622a4c2fd340] Setting 'sample_fmt' to value 's16'
+[graph_0_in_0_0 @ 0x622a4c2fd340] Setting 'channel_layout' to value '0x4'
+[graph_0_in_0_0 @ 0x622a4c2fd340] tb:1/16000 samplefmt:s16 samplerate:16000 chlayout:0x4
+[format_out_0_0 @ 0x622a4c2fdf80] Setting 'sample_fmts' to value 's16'
+[format_out_0_0 @ 0x622a4c2fdf80] Setting 'sample_rates' to value '16000'
+[format_out_0_0 @ 0x622a4c2fdf80] Setting 'channel_layouts' to value '0x4'
+[AVFilterGraph @ 0x622a4c2c3080] query_formats: 4 queried, 9 merged, 0 already done, 0 delayed
+Output #0, wav, to '/tmp/_t.wav':
+  Metadata:
+    ISFT            : Lavf58.76.100
+  Stream #0:0, 0, 1/16000: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, mono, s16, 256 kb/s
+    Metadata:
+      encoder         : Lavc58.134.100 pcm_s16le
+size=       4kB time=00:00:00.00 bitrate=N/A speed=N/A    stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.128  pts=0.128
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.256  pts=0.256
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.384  pts=0.384
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.512  pts=0.512
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.640  pts=0.640
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.768  pts=0.768
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=0.896  pts=0.896
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.024  pts=1.024
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.152  pts=1.152
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.280  pts=1.280
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.408  pts=1.408
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.536  pts=1.536
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.664  pts=1.664
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.792  pts=1.792
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=1.920  pts=1.920
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.048  pts=2.048
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.176  pts=2.176
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.304  pts=2.304
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.432  pts=2.432
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.560  pts=2.560
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.688  pts=2.688
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.816  pts=2.816
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=2.944  pts=2.944
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=3.072  pts=3.072
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=3.200  pts=3.200
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=3.328  pts=3.328
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.128
+  dts=3.456  pts=3.456
+  size=4096
+stream #0:
+  keyframe=1
+  duration=0.064
+  dts=3.584  pts=3.584
+  size=2048
+[out_0_0 @ 0x622a4c2fdb80] EOF on sink link out_0_0:default.
+No more output streams to write to, finishing.
+size=     114kB time=00:00:03.58 bitrate= 260.7kbits/s speed=2.6e+03x    
+video:0kB audio:114kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.066817%
+Input file #0 (tests/fresh_set/audio_s3/P003_ta_s3.wav):
+  Input stream #0:0 (audio): 29 packets read (116736 bytes); 29 frames decoded (58368 samples); 
+  Total: 29 packets (116736 bytes) demuxed
+Output file #0 (/tmp/_t.wav):
+  Output stream #0:0 (audio): 29 frames encoded (58368 samples); 29 packets muxed (116736 bytes); 
+  Total: 29 packets (116736 bytes) muxed
+29 frames successfully decoded, 0 decoding errors
+[AVIOContext @ 0x622a4c2f5a40] Statistics: 0 seeks, 1 writeouts
+[AVIOContext @ 0x622a4c2cc240] Statistics: 182350 bytes read, 1 seeks
+
+Enter command: <target>|all <time>|-1 <command>[ <argument>]
+
+Parse error, at least 3 arguments were expected, only 1 given in string 'ripts/evaluation/accuracy.py tests/fresh_set/audio_s3 2>&1 | tee results/accuracy/s3_medium_rerun.txt'
+en 6/10 60%
+hi 5/10 50%
+ta_en 4/10 40%
+ta 4/10 40%
+MISSES:
+  ('P003_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.71, 'பாரலி, சிப்பிஸ்க்கட் எங்கே இருக்கும்')
+  ('P003_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.81, 'R.A.G. biscuit, N.G.E.R.O.P.')
+  ('P004_en_s3.wav', 'LOW_CONFIDENCE', None, 0.64, 'Where is Ashur Vata?')
+  ('P004_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'आश्वर्वाद काहाम में लेका')
+  ('P005_en_s3.wav', 'LOW_CONFIDENCE', None, 0.73, 'Very start of salt.')
+  ('P005_ta_en_s3.wav', 'NOT_FOUND', None, 0.48, 'தாட்டா சோன்ட்டங்க இருக்கு.')
+  ('P006_hi_s3.wav', 'LOW_CONFIDENCE', None, 0.0, '')
+  ('P007_ta_s3.wav', 'NOT_FOUND', None, 0.46, 'மாய் யோக்கு ஓர் செங்கியருக்கு.')
+  ('P010_hi_s3.wav', 'NOT_FOUND', None, 0.52, 'जिताने आब ब्रेट कहाँ लेगा?')
+  ('P010_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.72, 'Tata bread,')
+  ('P014_en_s3.wav', 'LOW_CONFIDENCE', None, 0.6, 'Red is film liquid.')
+  ('P014_hi_s3.wav', 'NOT_FOUND', None, 0.48, 'विन देशवाशर लिक्वेट कहा में लेगा?')
+  ('P014_ta_en_s3.wav', 'LOW_CONFIDENCE', None, 0.67, 'திட்டு வேண்டும் திட்டு வாழ்ச்சில் குடைங்கிர்ப்பது')
+  ('P014_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.74, 'When this wash liquid in there.')
+  ('P016_ta_en_s3.wav', 'NOT_FOUND', None, 0.46, 'தாய் 2000 டையிருக்க.')
+  ('P016_ta_s3.wav', 'LOW_CONFIDENCE', None, 0.7, 'தைடிடாஜன்ட் எங்கே இருக்கும்')
+  ('P021_en_s3.wav', 'NOT_FOUND', None, 0.38, 'Where is bright?')
+  ('P021_hi_s3.wav', 'NOT_FOUND', None, 0.4, 'अस प्राइत कहा में लेगा.')
+  ('P021_ta_en_s3.wav', 'NOT_FOUND', None, 0.45, 'சிராய்ட எங்க இருக்க…')
+  ('P021_ta_s3.wav', 'NOT_FOUND', None, 0.45, 'செர்யட் எங்கே இருக்கும்')
+  ('P024_ta_en_s3.wav', 'NOT_FOUND', None, 0.5, 'ஓர் காவி எங்க இருந்து설்புகிறேன்')
