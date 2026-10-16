@@ -1,0 +1,15 @@
+PASS health over TLS 200
+PASS start, no token -> 401 401
+PASS start, bad token -> 401 401
+PASS start, wrong scheme -> 401 401
+PASS start, good token -> session s_0001
+PASS chunk, no token -> 401 401
+PASS chunk, unknown session -> 404 404
+PASS chunk, good -> 204 204
+PASS end, no token -> 401 401
+PASS end, good -> OK P003 (200, 'P003')
+PASS end again (closed session) -> 404/410 410
+PASS self-signed cert rejected without CA ConnectError
+PASS plain HTTP to TLS port refused RemoteProtocolError
+TLS version: TLSv1.3
+RESULT 13 / 13
