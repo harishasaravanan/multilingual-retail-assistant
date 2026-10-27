@@ -1,0 +1,26 @@
+>>> (1/8) HOLD BTN0 and say: Where is Parle-G biscuits?   [en]   release when done
+    1: 2.68 s peak 8800 DETECTED
+>>> (2/8) HOLD BTN0 and say: Parle-G biscuit kahan milega?   [hi]   release when done
+    2: 2.86 s peak 11715 DETECTED
+>>> (3/8) HOLD BTN0 and say: Parle-G biscuit enga irukku?   [ta-en]   release when done
+    3: 2.36 s peak 4025 DETECTED
+>>> (4/8) HOLD BTN0 and say: Parle-G பிஸ்கட் எங்கே இருக்கு?   [ta]   release when done
+    4: 2.72 s peak 4660 DETECTED
+>>> (5/8) HOLD BTN0 and say: Where is Parle-G biscuits?   [en]   release when done
+    5: 2.28 s peak 9100 DETECTED
+>>> (6/8) HOLD BTN0 and say: Parle-G biscuit kahan milega?   [hi]   release when done
+    6: 2.26 s peak 7080 DETECTED
+>>> (7/8) HOLD BTN0 and say: Parle-G biscuit enga irukku?   [ta-en]   release when done
+    7: 2.50 s peak 8125 DETECTED
+>>> (8/8) HOLD BTN0 and say: Parle-G பிஸ்கட் எங்கே இருக்கு?   [ta]   release when done
+    8: 2.98 s peak 9040 DETECTED
+SUMMARY
+1 2.68 s peak 8800 DETECTED
+2 2.86 s peak 11715 DETECTED
+3 2.36 s peak 4025 DETECTED
+4 2.72 s peak 4660 DETECTED
+5 2.28 s peak 9100 DETECTED
+6 2.26 s peak 7080 DETECTED
+7 2.50 s peak 8125 DETECTED
+8 2.98 s peak 9040 DETECTED
+VAD detected 8 / 8

@@ -1,9 +1,10 @@
 import sys,serial,wave,struct
-s=serial.Serial('/dev/serial/by-id/usb-Silicon_Labs_J-Link_OB_000440353929-if00',115200,timeout=60)
+s=serial.Serial('/dev/serial/by-id/usb-Silicon_Labs_J-Link_OB_000440353914-if00',115200,timeout=60)
 print('waiting; press F8 in Studio, then speak for 3 s')
 hx=[];rate=16000;on=False
 while True:
     l=s.readline().decode(errors='ignore').strip()
+    if 'ERR' in l: print(l)
     if l.startswith('START'): on=True; rate=int(l.split()[2]); continue
     if l.startswith('END'): break
     if on: hx.append(l)

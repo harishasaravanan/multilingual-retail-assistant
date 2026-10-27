@@ -1,0 +1,5 @@
+#define WIFI_SSID      "your-network-name"
+#define WIFI_PASSWORD  "your-password"
+#define BACKEND_IP     "10.11.41.41"
+#define BACKEND_PORT   8443
+#define DEVICE_TOKEN   "put-a-long-random-token-here"
