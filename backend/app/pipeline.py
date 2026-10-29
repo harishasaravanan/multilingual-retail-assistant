@@ -135,4 +135,5 @@ class SessionManager:
             out["transcript"] = transcript
             return out
         except Exception:
+            import traceback; traceback.print_exc()
             return self.pipeline.error(rid)

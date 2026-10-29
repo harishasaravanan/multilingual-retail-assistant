@@ -19,10 +19,14 @@ tests/audio/private/
 .pytest_cache/
 backend/tts_cache/
 *.bak*
-*.bak*
 tests/test_dataset/*.wav
 archive/
 output.json
 pytest_html_report.html
 tests/*.zip
 tests/fresh_set/audio_s3/
+firmware/siwx917/config/server_cert.h
+
+**/wifi_config.h
+**/clip_pcm.h
+
