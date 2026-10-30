@@ -21,7 +21,7 @@ def transcribe(pcm: bytes) -> str:
     _, _, probs = m.detect_language(audio)
     probs = dict(probs)
     lang = max(("en", "ta", "hi"), key=lambda l: probs.get(l, 0))
-    segs, _ = m.transcribe(audio, beam_size=1, vad_filter=True, language=lang, initial_prompt=(None if __import__("os").environ.get("MRA_NO_PROMPT") else PROMPT), condition_on_previous_text=False, no_speech_threshold=0.6)
+    segs, _ = m.transcribe(audio, beam_size=1, vad_filter=True, language=lang, initial_prompt=(None if __import__("os").environ.get("MRA_NO_PROMPT") else PROMPT), condition_on_previous_text=False, **({"no_repeat_ngram_size": 3, "repetition_penalty": 1.15} if __import__("os").environ.get("MRA_NOREPEAT") else {}), temperature=(0.0 if __import__("os").environ.get("MRA_TEMP0") else [0.0,0.2,0.4,0.6,0.8,1.0]), no_speech_threshold=0.6)
     segs = list(segs)
     return _strip_echo(" ".join(s.text for s in segs).strip())
 

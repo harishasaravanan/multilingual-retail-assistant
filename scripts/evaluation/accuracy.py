@@ -1,5 +1,5 @@
 import sys, glob, os, wave, subprocess, httpx, collections
-H = {"Authorization": "Bearer dev-device"}
+H = {"Authorization": "Bearer " + os.environ.get("MRA_DEVICE_TOKEN", "dev-device")}
 B = "http://127.0.0.1:8000"
 c = httpx.Client(timeout=60)
 hit, tot, misses = collections.Counter(), collections.Counter(), []
