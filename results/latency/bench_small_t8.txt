@@ -1,0 +1,40 @@
+P001_en_s1.wav | 1.38s | Where is Dove shampoo?
+P001_hi_s1.wav | 1.33s | Dove shampoo, where will you get?
+P001_ta_en_s1.wav | 1.45s | தவ் சாம்ப்பு எங்கே இருக்கிறது?
+P001_ta_s1.wav | 1.29s | தவ்ஷாம்ப் பார்க்கு எங்கே இருக்கிறது?
+P005_en_s1.wav | 1.19s | Where is Tata salt?
+P005_hi_s1.wav | 1.22s | Tata salt, कहा में लेगा?
+P005_ta_en_s1.wav | 1.26s | தாட்டா சால்ட்டு எங்க இருக்கு?
+P005_ta_s1.wav | 1.30s | டாட்டாசால் எங்கே இருக்கிறது?
+P006_en_s1.wav | 1.17s | Where is Amul butter?
+P006_hi_s1.wav | 1.31s | अमौल बटर कहा मेंगेगा?
+P006_ta_en_s1.wav | 1.23s | ஏன் எங்க இருக்கிறது?
+P006_ta_s1.wav | 1.38s | எங்கே இருக்கு?
+P007_en_s1.wav | 1.29s | Where is Maggi noodles?
+P007_hi_s1.wav | 1.28s | Maggi noodles, कहाں में लेगा?
+P007_ta_en_s1.wav | 1.18s | Maggi noodles, hang on.
+P007_ta_s1.wav | 1.30s | மகினூடல் செங்கே இருக்கு?
+P012_en_s1.wav | 1.20s | Where is Dove conditioner?
+P012_hi_s1.wav | 1.32s | Dove conditioner, कहाں में लेगा?
+P012_ta_en_s1.wav | 1.29s | தவு கண்டிஷ்ணர் எங்க இருக்கு?
+P012_ta_s1.wav | 1.36s | டாவ் கண்டிஸ்னர் எங்கே இருக்கு?
+P017_en_s1.wav | 1.18s | Wear a thumbs up.
+P017_hi_s1.wav | 1.25s | तम सब कहा मेलेगा?
+P017_ta_en_s1.wav | 1.27s | தம்சாப் எங்க இருக்கிறது?
+P017_ta_s1.wav | 1.32s | தம்ஸாப் எங்கே இருக்கு?
+P030_en_s1.wav | 1.24s | Where is sugar?
+P030_hi_s1.wav | 1.31s | शुगर कहा मिलेगा?
+P030_ta_en_s1.wav | 1.38s | சுகர் எங்கே இருக்கு?
+P030_ta_s1.wav | 1.37s | சூகர் எங்கே இருக்கு?
+P035_en_s1.wav | 1.32s | Where is Oreo biscuit?
+P035_hi_s1.wav | 1.46s | और वो बिस्कूट कहा में लेगा?
+P035_ta_en_s1.wav | 1.41s | ஓரியோ பிஸ்கட் எங்க இருக்கு?
+P035_ta_s1.wav | 1.44s | ஓரியோ பிஸ்கட் எங்கே இருக்கிறது?
+P041_en_s1.wav | 1.08s | Where is Amul milk?
+P041_hi_s1.wav | 1.18s | Amul milk, कहाں में लेगा?
+P041_ta_en_s1.wav | 11.96s | yimஸ்மாமை நிறுத்முடு,  நீண்கள் அன்று நேர்கள் vertices மைக்கச்டார் அதைத்தை உங்கள் எடுக்கிறது கேட்raszamங்கச்̱ ஏற்கி Ouaisக்,  ஈடியங்க ஹாணிகை ஜீங்க, Y pliersாண்காணிகை அத்தில் க Dani கிட மீத் துழி பார்த்தில்  எடுமே செல்ல வைத் தோடின்று இருக்கிறது,
+P041_ta_s1.wav | 1.24s | எங்கே இருக்கு?
+P043_en_s1.wav | 1.18s | Where's Amul cheese?
+P043_hi_s1.wav | 1.12s | Amul cheese, कहाں में लेगा?
+P043_ta_en_s1.wav | 5.87s | எங்கே இருக்கிறீர்கள்?
+P043_ta_s1.wav | 1.22s | ஹமல் சீ செங்கே இருக்கு?

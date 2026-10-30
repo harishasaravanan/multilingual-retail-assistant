@@ -1,0 +1,20 @@
+P001_en_s1.wav | Where is Dove shampoo?
+P001_ta_en_s1.wav | Dove shampoo எங்க இருக்கு?
+P005_en_s1.wav | Where is Tata salt?
+P005_ta_en_s1.wav | Tata salt எங்க இருக்கு?
+P006_en_s1.wav | Where is Amul butter?
+P006_ta_en_s1.wav | அமுல் பட்டர் எங்க இருக்கு?
+P007_en_s1.wav | Where is Maggi noodles?
+P007_ta_en_s1.wav | Maggi noodles எங்க இருக்கு?
+P012_en_s1.wav | Where is Dove conditioner?
+P012_ta_en_s1.wav | Dove conditioner எங்க இருக்கு?
+P017_en_s1.wav | Wear his thumbs up.
+P017_ta_en_s1.wav | Thums Up எங்க இருக்கு?
+P030_en_s1.wav | Where is sugar?
+P030_ta_en_s1.wav | சுகர் எங்கே இருக்கு?
+P035_en_s1.wav | Where is Oreo biscuit?
+P035_ta_en_s1.wav | Oreo biscuit எங்க இருக்கு?
+P041_en_s1.wav | Where is Amul milk?
+P041_ta_en_s1.wav | Amul milk எங்க இருக்கு?
+P043_en_s1.wav | Where is Amul cheese?
+P043_ta_en_s1.wav | Amul cheese எங்க இருக்கு?

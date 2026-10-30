@@ -1,0 +1,4 @@
+small_t8: median 1.29s  p95 1.46s  n=40
+small_t8_temp0: median 1.29s  p95 1.42s  n=40
+small_t6_temp0: median 1.20s  p95 1.30s  n=40
+medium_t8_temp0: median 2.90s  p95 3.06s  n=20

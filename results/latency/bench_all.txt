@@ -1,0 +1,6 @@
+small_t8: median 1.28s  p95 5.39s  n=20
+small_t16: median 1.22s  p95 6.55s  n=20
+medium_t8: median 2.81s  p95 2.99s  n=20
+medium_t12: median 4.75s  p95 4.91s  n=20
+medium_t16: median 3.68s  p95 3.83s  n=20
+medium_t8_pin: median 2.74s  p95 2.90s  n=20

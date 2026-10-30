@@ -1,0 +1,20 @@
+P001_en_s1.wav | 2.79s | Where is Dove shampoo?
+P001_ta_en_s1.wav | 2.93s | Dove shampoo எங்க இருக்கு?
+P005_en_s1.wav | 2.81s | Where is Tata salt?
+P005_ta_en_s1.wav | 2.83s | Tata salt எங்க இருக்கு?
+P006_en_s1.wav | 2.71s | Where is Amul butter?
+P006_ta_en_s1.wav | 3.06s | அமுல் பட்டர் எங்க இருக்கு?
+P007_en_s1.wav | 2.90s | Where is Maggi noodles?
+P007_ta_en_s1.wav | 2.90s | Maggi noodles எங்க இருக்கு?
+P012_en_s1.wav | 2.73s | Where is Dove conditioner?
+P012_ta_en_s1.wav | 2.87s | Dove conditioner எங்க இருக்கு?
+P017_en_s1.wav | 2.77s | Wear his thumbs up.
+P017_ta_en_s1.wav | 2.93s | Thums Up எங்க இருக்கு?
+P030_en_s1.wav | 2.86s | Where is sugar?
+P030_ta_en_s1.wav | 3.05s | சுகர் எங்கே இருக்கு?
+P035_en_s1.wav | 3.22s | Where is Oreo biscuit?
+P035_ta_en_s1.wav | 3.00s | Oreo biscuit எங்க இருக்கு?
+P041_en_s1.wav | 2.87s | Where is Amul milk?
+P041_ta_en_s1.wav | 2.99s | Amul milk எங்க இருக்கு?
+P043_en_s1.wav | 2.93s | Where is Amul cheese?
+P043_ta_en_s1.wav | 3.04s | Amul cheese எங்க இருக்கு?
