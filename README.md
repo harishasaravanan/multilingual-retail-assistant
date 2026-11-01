@@ -27,8 +27,14 @@ Customer voice -> SiWx917 (mic, HPF/AGC, VAD, TLS) -> backend (STT, language ID,
 ## Status
 | Phase | State |
 |---|---|
-| 0 Architecture | in progress |
-| 1-7 | not started |
+| 0 Architecture | done |
+| 1 Board bring-up | in progress (Rev A02 detected, toolchain works, mic capture next) |
+| 2 Wi-Fi/TLS streaming | not started (backend streaming verified from script) |
+| 3 STT/matcher | done, dev 80/80, s3 33/40, s4 pending |
+| 4 DB + API | done |
+| 5 Routing | done, 10/10 destinations logged |
+| 6 UI + TTS | done, all states verified |
+| 7 Evaluation | partial, see docs/evaluation_report.md |
 
 ## Results
 Latency, accuracy and WER are published under `results/` after Phase 7. Targets in the SAD are goals; only measured numbers are reported.

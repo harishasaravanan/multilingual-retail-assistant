@@ -1,0 +1,24 @@
+=== A: server hard-killed mid-utterance, back after 5 s ===
+[server killed at 2 s]
+main: line 126: 949869 Killed                  MRA_DEVICE_TOKEN=test-device MRA_KIOSK_TOKEN=test-kiosk MRA_DEV_TRANSCRIPT=1 nohup python3 -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8443 --ssl-keyfile ../secrets/server.key --ssl-certfile ../secrets/server.pem > /tmp/mra_tls.log 2>&1
+[server restarted]
+[2.0s] failure detected: ConnectError
+[2.0s] retry 1 in 0.5 s
+[2.5s] retry 2 in 1.0 s
+[3.5s] retry 3 in 2.0 s
+[5.5s] retry 4 in 4.0 s
+RESULT OK P003 attempts=5 recovered 11.55 s after first failure, total 13.6 s
+main: line 126: 949899 Killed                  MRA_DEVICE_TOKEN=test-device MRA_KIOSK_TOKEN=test-kiosk MRA_DEV_TRANSCRIPT=1 nohup python3 -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8443 --ssl-keyfile ../secrets/server.key --ssl-certfile ../secrets/server.pem > /tmp/mra_tls.log 2>&1
+=== B: server hard-killed, down 15 s, then back ===
+[server killed at 2 s]
+main: line 126: 949937 Killed                  MRA_DEVICE_TOKEN=test-device MRA_KIOSK_TOKEN=test-kiosk MRA_DEV_TRANSCRIPT=1 nohup python3 -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8443 --ssl-keyfile ../secrets/server.key --ssl-certfile ../secrets/server.pem > /tmp/mra_tls.log 2>&1
+[server restarted]
+[2.0s] failure detected: ConnectError
+[2.0s] retry 1 in 0.5 s
+[2.5s] retry 2 in 1.0 s
+[3.5s] retry 3 in 2.0 s
+[5.5s] retry 4 in 4.0 s
+[9.5s] retry 5 in 4 s
+[13.5s] retry 6 in 4 s
+RESULT OK P003 attempts=7 recovered 19.56 s after first failure, total 21.6 s
+main: line 126: 949987 Killed                  MRA_DEVICE_TOKEN=test-device MRA_KIOSK_TOKEN=test-kiosk MRA_DEV_TRANSCRIPT=1 nohup python3 -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port 8443 --ssl-keyfile ../secrets/server.key --ssl-certfile ../secrets/server.pem > /tmp/mra_tls.log 2>&1

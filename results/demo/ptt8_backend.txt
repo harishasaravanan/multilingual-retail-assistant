@@ -1,0 +1,8 @@
+results/demo/ptt8/u01.wav OK en P003 0.97 3.72 s
+results/demo/ptt8/u02.wav OK hi P003 0.9 3.98 s
+results/demo/ptt8/u03.wav OK ta P003 0.87 3.71 s
+results/demo/ptt8/u04.wav OK ta P003 0.94 3.96 s
+results/demo/ptt8/u05.wav OK en P003 0.97 3.83 s
+results/demo/ptt8/u06.wav OK hi P003 0.93 4.31 s
+results/demo/ptt8/u07.wav OK ta P003 0.89 4.29 s
+results/demo/ptt8/u08.wav OK ta P003 0.89 4.31 s

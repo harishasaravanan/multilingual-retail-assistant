@@ -1,0 +1,23 @@
+/* generated from secrets/server.pem; git-ignored */
+#pragma once
+static const unsigned char cacert[] =
+  "-----BEGIN CERTIFICATE-----\n"
+  "MIIDSjCCAjKgAwIBAgIUApZuWbK6gtqa/yjXbc1McpcKF5EwDQYJKoZIhvcNAQEL\n"
+  "BQAwGjEYMBYGA1UEAwwPbWFnaWNsYWIzLmxvY2FsMB4XDTI2MTAxNjA2MDU1NloX\n"
+  "DTI3MTAxNjA2MDU1NlowGjEYMBYGA1UEAwwPbWFnaWNsYWIzLmxvY2FsMIIBIjAN\n"
+  "BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1UuTNUgK2rUZH3pkROocSQeozVVg\n"
+  "sHQW/DVJdIQW9g42+ivPwGC4/waYRYmRVDZLJyWoE4fAOZmYJ/uM7IF5cg6f5K4O\n"
+  "VqC/aUg3jJ4RfDSu1yDUyM4bVElcaELZoRMNaFnHJ3rF3+CIfRXAVOxnHWtfOynz\n"
+  "LGgIOpGzfbHb3mi72Ehdn04QUH5PyYkeBFcn5y68FnNR2EUUGXnhCem+ZKzhSfEs\n"
+  "QpG8JoZlrEvfsnvWGYh1x3J24x/WwyDd8tlBaIjN8P0jDrGPY/9p/btQcuK7kpAK\n"
+  "hDOK3oMhq7XfTT4MRwmWo0O21EMHTbUZxhAOyEVzOtjvu+F10M4AyWq8mQIDAQAB\n"
+  "o4GHMIGEMB0GA1UdDgQWBBQA6YhcEfQHr7ATlq7DpSNapjLNgTAfBgNVHSMEGDAW\n"
+  "gBQA6YhcEfQHr7ATlq7DpSNapjLNgTAPBgNVHRMBAf8EBTADAQH/MDEGA1UdEQQq\n"
+  "MCiCD21hZ2ljbGFiMy5sb2NhbIIJbG9jYWxob3N0hwR/AAABhwQKCykpMA0GCSqG\n"
+  "SIb3DQEBCwUAA4IBAQCTmTNu8cikMO8McmIrg0c6KhDyO9hpT2hqgMpSuzL4df5A\n"
+  "TA/pqHEN4jvM+npDaOooNsxERM7XTvRol6SGINPyTzbEqIsBjud5n6d/cVIbzWZc\n"
+  "phqHnxYPLq/+ba+eXs6hTBb5yeE1TkCW7x55qcqRmQQQIjx6pRb9Qfzq+2wwrB8S\n"
+  "eMfC+fhr4nSs11A5MFXqzkzvUlZbgllcCENVSxWjsU/ziVzt7u77tmdCsxyLX02N\n"
+  "yIq9diZIzxDNE4uhir6JNBqCdM+ShbYLBjztjE8Su0zz3BgzXvIpZmu0okz6Tbnt\n"
+  "0vFDydntqbBIIuXHGvcmZiC/qZUq0qBtD4lchnTv\n"
+  "-----END CERTIFICATE-----\n";
