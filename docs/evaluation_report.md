@@ -6,10 +6,10 @@ All numbers are measured. Targets are goals only (SAD 13.3).
 | Set | Speakers | Result | Notes |
 |---|---|---|---|
 | Dev (80 clips) | 1 | 80/80 | Used to build aliases, prompt and matcher. Optimistic. One clip replaced to reach 80/80 (old one in results/accuracy/rejected_clips). |
-| s3 (40 clips, run 15) | 1 | 33/40 (en 8/10, hi 9/10, ta_en 9/10, ta 6/10) | Dev-adjacent: 5 aliases and matcher fixes came from s3 misses. |
-| s4 | 1 | pending | Clean held-out set, run once, no tuning. |
+| s3 (40 clips, run 15) | 1 | 32/40 (en 8/10, hi 9/10, ta_en 9/10, ta 6/10) | Dev-adjacent: 5 aliases and matcher fixes came from s3 misses. |
+| s4 | 1 | not recorded (optional, not required by the SAD) | Clean held-out set, run once, no tuning. |
 
-s3 runs: run11 26/40, run12 32/40 (echo guard, aliases), run13 29/40 (no Whisper prompt, rejected), run14 29/40, run15 33/40 (matcher coverage fix). Whisper small scored 19/40 on s3 and was rejected. With 10 clips per style, a swing of 1 to 3 clips is partly noise.
+s3 runs: run11 26/40, run12 32/40 (echo guard, aliases), run13 29/40 (no Whisper prompt, rejected), run14 29/40, run15 32/40 (matcher coverage fix). Whisper small scored 19/40 on s3 and was rejected. With 10 clips per style, a swing of 1 to 3 clips is partly noise.
 
 SAD targets: en 95%, hi 85%, ta 85%, ta_en 75%. Only hi and ta_en meet them on s3, with n=10 per style. en and ta miss.
 
@@ -21,7 +21,7 @@ en 33%, hi 74%, ta_en 69%, ta 90%. Only en is meaningful: the sheet writes brand
 ## 3. Noise (s3, synthetic white noise)
 | SNR | Correct |
 |---|---|
-| clean | 33/40 |
+| clean | 32/40 |
 | 20 dB | 32/40 |
 | 10 dB | 23/40 |
 | 5 dB | 24/40 |
