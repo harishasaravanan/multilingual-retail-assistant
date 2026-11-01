@@ -4,7 +4,7 @@ Voice kiosk: a customer asks for a product in English, Hindi, Tamil or Tanglish.
 
 Spec: SAD v2.3 (docs/SAD.md), API: docs/API.md. Per SAD v2.3, price is not shown or spoken; stock is reported as available / out of stock.
 
-Team: (add names)
+Team: Harisha, Rajalingam
 
 ## Layout
 - firmware/siwx917/mra_wifi2: mic capture, HPF/AGC, VAD, PTT (BTN0), LED, TLS upload
