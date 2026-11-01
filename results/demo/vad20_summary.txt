@@ -1,0 +1,63 @@
+ready. In Studio press F8 ONCE, then speak at every SPEAK NOW
+>>> SPEAK NOW (1/20)
+    1: 2.62 s peak 12285 DETECTED (next round starting)
+>>> SPEAK NOW (2/20)
+    2: 2.46 s peak 10895 DETECTED (next round starting)
+>>> SPEAK NOW (3/20)
+    3: 3.40 s peak 12390 DETECTED (next round starting)
+>>> SPEAK NOW (4/20)
+    4: 0.48 s peak 18665 MISSED (next round starting)
+>>> SPEAK NOW (5/20)
+    5: 0.86 s peak 15280 DETECTED (next round starting)
+>>> SPEAK NOW (6/20)
+    6: 1.94 s peak 18400 DETECTED (next round starting)
+>>> SPEAK NOW (7/20)
+    7: 2.82 s peak 19440 DETECTED (next round starting)
+>>> SPEAK NOW (8/20)
+    8: 1.56 s peak 13665 DETECTED (next round starting)
+>>> SPEAK NOW (9/20)
+    9: 3.18 s peak 15910 DETECTED (next round starting)
+>>> SPEAK NOW (10/20)
+    10: 3.64 s peak 11835 DETECTED (next round starting)
+>>> SPEAK NOW (11/20)
+    11: 3.96 s peak 13915 DETECTED (next round starting)
+>>> SPEAK NOW (12/20)
+    12: 3.96 s peak 14115 DETECTED (next round starting)
+>>> SPEAK NOW (13/20)
+    13: 2.08 s peak 13470 DETECTED (next round starting)
+>>> SPEAK NOW (14/20)
+    14: 3.14 s peak 32768 DETECTED (next round starting)
+>>> SPEAK NOW (15/20)
+    15: 3.60 s peak 11995 DETECTED (next round starting)
+>>> SPEAK NOW (16/20)
+    16: 2.46 s peak 20850 DETECTED (next round starting)
+>>> SPEAK NOW (17/20)
+    17: 2.24 s peak 7520 DETECTED (next round starting)
+>>> SPEAK NOW (18/20)
+    18: 2.22 s peak 32768 DETECTED (next round starting)
+>>> SPEAK NOW (19/20)
+    19: 2.54 s peak 12755 DETECTED (next round starting)
+>>> SPEAK NOW (20/20)
+    20: 3.44 s peak 32768 DETECTED (next round starting)
+SUMMARY
+1 2.62 s peak 12285 DETECTED
+2 2.46 s peak 10895 DETECTED
+3 3.40 s peak 12390 DETECTED
+4 0.48 s peak 18665 MISSED
+5 0.86 s peak 15280 DETECTED
+6 1.94 s peak 18400 DETECTED
+7 2.82 s peak 19440 DETECTED
+8 1.56 s peak 13665 DETECTED
+9 3.18 s peak 15910 DETECTED
+10 3.64 s peak 11835 DETECTED
+11 3.96 s peak 13915 DETECTED
+12 3.96 s peak 14115 DETECTED
+13 2.08 s peak 13470 DETECTED
+14 3.14 s peak 32768 DETECTED
+15 3.60 s peak 11995 DETECTED
+16 2.46 s peak 20850 DETECTED
+17 2.24 s peak 7520 DETECTED
+18 2.22 s peak 32768 DETECTED
+19 2.54 s peak 12755 DETECTED
+20 3.44 s peak 32768 DETECTED
+VAD detected 19 / 20
